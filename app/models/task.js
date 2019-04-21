@@ -8,3 +8,11 @@ export default class TaskModel extends Model {
   @attr completedAt;
   @attr onCalendar;
 }
+
+// export default DS.Model.extend({
+//   description: DS.attr(),
+//   detail: DS.attr(),
+//   targetDate: DS.attr(),
+//   completedAt: DS.attr(),
+//   onCalendar: DS.attr()
+// });
