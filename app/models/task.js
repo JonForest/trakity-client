@@ -5,6 +5,6 @@ export default class TaskModel extends Model {
   @attr description;
   @attr detail;
   @attr targetDate;
-  @attr targetTime;
   @attr completedAt;
+  @attr onCalendar;
 }
