@@ -1,5 +1,10 @@
-<ul>
-  {{#each this.model as |task|}}
-    <Task @task={{task}}></Task>
-  {{/each}}
-</ul>
+<div class="flex">
+  <div>
+    <DashboardTaskLists @tasks={{this.model}} />
+  </div>
+  <div>
+    <h1>Calendar</h1>
+  </div>
+
+</div>
+

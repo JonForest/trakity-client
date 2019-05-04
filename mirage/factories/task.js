@@ -8,7 +8,15 @@ export default Factory.extend({
     return faker.lorem.paragraph()
   },
   targetDate() {
-    return new Date()
+    const today = new Date()
+    const plusDate = Math.floor(Math.random() * 7)
+    return new Date(today.setDate(today.getDate() + plusDate))
+  },
+  priority() {
+    // Return half as null, and half with a random numeric priority between 1 - 100
+    return Math.random() <= 0.5
+      ? Math.floor(Math.random() * 100) + 1
+      : null
   },
   completedAt: null,
   onCalendar: false
