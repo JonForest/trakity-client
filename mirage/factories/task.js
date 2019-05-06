@@ -5,7 +5,9 @@ export default Factory.extend({
     return faker.lorem.words(5)
   },
   detail() {
-    return faker.lorem.paragraph()
+    return Math.random() <= 0.5
+      ? faker.lorem.paragraph()
+      : null
   },
   targetDate() {
     const today = new Date()

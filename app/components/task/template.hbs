@@ -1,1 +1,6 @@
-<li>{{@task.description}} - {{@task.priority}}</li>
+<li class="list-reset border border-grey rounded my-4 p-2">
+  {{@task.description}} - {{@task.priority}}
+  {{#if @task.detail}}
+    <div class="my-1"><img src="images/detail_icon.svg" class="icon"></div>
+  {{/if}}
+</li>
