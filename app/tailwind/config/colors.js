@@ -73,6 +73,8 @@ export default {
   'blue': '#3490dc',
   'blue-light': '#6cb2eb',
   'blue-lighter': '#bcdefa',
+  //def0ff
+  'blue-background': '#e1ebf3',
   'blue-lightest': '#eff8ff',
 
   'indigo-darkest': '#191e38',

@@ -22,5 +22,10 @@
 /bower.json.ember-try
 /package.json.ember-try
 
-# IDE
+# IDE and OS
 .idea
+.DS_Store
+
+# Custom ignores
+/local
+temp.txt

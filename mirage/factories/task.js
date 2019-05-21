@@ -20,6 +20,10 @@ export default Factory.extend({
       ? Math.floor(Math.random() * 100) + 1
       : null
   },
-  completedAt: null,
+  completedAt() {
+    return Math.random() <= 0.25
+      ? null
+      : new Date()
+  },
   onCalendar: false
 });

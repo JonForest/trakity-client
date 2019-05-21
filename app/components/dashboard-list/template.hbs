@@ -1,8 +1,19 @@
 {{#if @tasks.length}}
-  <ul>
-    <h1>{{@title}}</h1>
-    {{#each @tasks as |task|}}
-      <Task @task={{task}}></Task>
-    {{/each}}
-  </ul>
+  <div class="bg-white p-4 m-4 rounded-lg">
+    <DashboardList::Title
+      @title={{@title}}
+      @count={{length this.uncompletedTasks}}
+    />
+    <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
+      {{#each this.uncompletedTasks as |task|}}
+        <Task @task={{task}}></Task>
+      {{/each}}
+    </ul>
+
+    <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
+      {{#each this.completedTasks as |task|}}
+        <Task @task={{task}}></Task>
+      {{/each}}
+    </ul>
+  </div>
 {{/if}}
