@@ -1,0 +1,27 @@
+{{#if @tasks.length}}
+  <div class="bg-white p-4 m-4 rounded-lg">
+
+    <TaskList::Title
+      @title={{@title}}
+      @count={{length this.uncompletedTasks}}
+    />
+    <AnimatedContainer>
+      <AnimatedContainer>
+        <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
+          {{#animated-each this.uncompletedTasks use=this.transition duration=250 as |task|}}
+            <Task @task={{task}} @completeTask={{fn this.completeTask task}}></Task>
+          {{/animated-each}}
+        </ul>
+      </AnimatedContainer>
+
+      <AnimatedContainer>
+        <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
+          {{#animated-each this.completedTasks use=this.transition duration=250 as |task|}}
+            <Task @task={{task}} @completeTask={{fn this.completeTask task}}></Task>
+          {{/animated-each}}
+        </ul>
+      </AnimatedContainer>
+    </AnimatedContainer>
+
+  </div>
+{{/if}}

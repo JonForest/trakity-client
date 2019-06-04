@@ -1,8 +1,9 @@
- <svg
-      ...attributes
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 512 512'
-    >
-      <title>{{@title}}</title>
-      {{{get-icon-path @key}}}
-    </svg>
+{{#if @onClick}}
+  <span {{on "click" @onClick}} class="cursor-pointer">
+    <Icon::Svg @title={{@title}} @key={{@key}} ...attributes />
+  </span>
+{{else}}
+  <span>
+    <Icon::Svg @title={{@title}} @key={{@key}} ...attributes />
+  </span>
+{{/if}}

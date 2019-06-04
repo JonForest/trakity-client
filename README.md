@@ -1,3 +1,9 @@
+//    todo: try adding the action back onto the <Icon and see if it now throws?
+//    todo: remove the action helper and replace with the on helper
+//    todo: look at svg-jar to see if it can replace my icon component
+//    todo: add border-transparent to link-only button
+
+
 # trakity-client
 
 This README outlines the details of collaborating on this Ember application.

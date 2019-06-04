@@ -1,6 +1,5 @@
 // import {dateFilters} from 'client/constants'
 import { getStartOfDay } from './date-funcs'
-import { get } from '@ember/object'
 // import _curry from 'lodash/curry'
 // import _includes from 'lodash/includes'
 // import { formatShortDate } from 'client/helpers/format-short-date'
@@ -123,70 +122,70 @@ function filterTasksByQueryKey (tasks, queryKey = 'TODAY', startDate = null, fin
     })
 }
 
-function filterTasksByTags (tasks, tags) {
-  if (!tasks || !tasks.length) return []
+// function filterTasksByTags (tasks, tags) {
+//   if (!tasks || !tasks.length) return []
+//
+//   const filteredTasks = !tags || !tags.length || !tags.any(tag => !tag.show)
+//     ? tasks.map(task => task)
+//     : tasks.filter(task => task.tags.any(tag => tag.show))
+//
+//   return filteredTasks
+//   // sort based on priority.  Note, not all tasks may have priority
+//   // const sorted = filteredTasks.sort((taskA, taskB) => {
+//   //   const priorityA = taskA.priority
+//   //   const priorityB = taskB.priority
+//   //
+//   //   // Handle null scenarios
+//   //   if (priorityA == null && priorityB != null) return 1
+//   //   if (priorityA != null && priorityB == null) return -1
+//   //   if (priorityA == null && priorityB == null) return 0
+//   //
+//   //   return priorityA - priorityB
+//   // })
+//   // return sorted
+// }
+//
+// function orderTasksByDate (tasks) {
+//   const sorted = tasks.sort((taskA, taskB) => {
+//     const targetA = taskA.targetDate
+//     const targetB = taskB.targetDate
+//
+//     if (targetA == null && targetB != null) return 1
+//     if (targetA != null && targetB == null) return -1
+//     if (targetA == null && targetB == null) return 0
+//
+//     return targetA.getTime() - targetB.getTime()
+//   })
+//
+//   return sorted
+// }
 
-  const filteredTasks = !tags || !tags.length || !tags.any(tag => !tag.show)
-    ? tasks.map(task => task)
-    : tasks.filter(task => task.tags.any(tag => tag.show))
-
-  return filteredTasks
-  // sort based on priority.  Note, not all tasks may have priority
-  // const sorted = filteredTasks.sort((taskA, taskB) => {
-  //   const priorityA = taskA.priority
-  //   const priorityB = taskB.priority
-  //
-  //   // Handle null scenarios
-  //   if (priorityA == null && priorityB != null) return 1
-  //   if (priorityA != null && priorityB == null) return -1
-  //   if (priorityA == null && priorityB == null) return 0
-  //
-  //   return priorityA - priorityB
-  // })
-  // return sorted
-}
-
-function orderTasksByDate (tasks) {
-  const sorted = tasks.sort((taskA, taskB) => {
-    const targetA = taskA.targetDate
-    const targetB = taskB.targetDate
-
-    if (targetA == null && targetB != null) return 1
-    if (targetA != null && targetB == null) return -1
-    if (targetA == null && targetB == null) return 0
-
-    return targetA.getTime() - targetB.getTime()
-  })
-
-  return sorted
-}
-
-function getTitle (queryKey = dateFilters.TODAY) {
-  const filter = queueConfig.find(item => item.key === queryKey)
-  let desc = filter.description
-  if (_includes(desc, '%s') || _includes(desc, '%f')) {
-    const startDate = filter.startDate()
-    desc = desc.replace('%s', formatShortDate([startDate]))
-    desc = desc.replace('%f', formatShortDate([filter.finishDate(startDate)]))
-  }
-  return desc
-}
+// function getTitle (queryKey = dateFilters.TODAY) {
+//   const filter = queueConfig.find(item => item.key === queryKey)
+//   let desc = filter.description
+//   if (_includes(desc, '%s') || _includes(desc, '%f')) {
+//     const startDate = filter.startDate()
+//     desc = desc.replace('%s', formatShortDate([startDate]))
+//     desc = desc.replace('%f', formatShortDate([filter.finishDate(startDate)]))
+//   }
+//   return desc
+// }
 
 /**
  * Get all the Queues that this task belongs to
  * @param task
  * @returns {Array}
  */
-function getTasksQueues (task) {
-  const matchedQueues = Object.keys(dateFilters).reduce((acc, key) => {
-    const results = filterTasksByQueue([task], dateFilters[key])
-    if (results && results.length) {
-      acc.push(key)
-    }
-    return acc
-  }, [])
-
-  return matchedQueues
-}
+// function getTasksQueues (task) {
+//   const matchedQueues = Object.keys(dateFilters).reduce((acc, key) => {
+//     const results = filterTasksByQueue([task], dateFilters[key])
+//     if (results && results.length) {
+//       acc.push(key)
+//     }
+//     return acc
+//   }, [])
+//
+//   return matchedQueues
+// }
 
 export { filterTasksByQueryKey/*, filterTasksByTags, getTitle, orderTasksByDate, getTasksQueues */}

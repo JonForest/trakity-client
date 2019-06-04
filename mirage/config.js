@@ -27,4 +27,7 @@ export default function() {
   this.get('/tasks', (schema, request) => {
     return schema.tasks.all()
   })
+
+  this.patch('/tasks/:id');
 }
+
