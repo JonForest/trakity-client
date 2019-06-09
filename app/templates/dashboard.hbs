@@ -1,10 +1,5 @@
-<div class="flex flex-wrap flex-col-reverse lg:flex-row">
-  <div class="w-full lg:w-1/2">
-    <DashboardTaskLists @tasks={{this.model}} />
-  </div>
-  <div class="w-full lg:w-1/2">
-    <h1>Calendar</h1>
-    <CalendarDay />
-  </div>
-
-</div>
+<ul>
+  {{#each model as |task|}}
+    <li>{{task.description}}</li>
+  {{/each}}
+</ul>

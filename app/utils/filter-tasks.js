@@ -1,8 +1,4 @@
-// import {dateFilters} from 'client/constants'
 import { getStartOfDay } from './date-funcs'
-// import _curry from 'lodash/curry'
-// import _includes from 'lodash/includes'
-// import { formatShortDate } from 'client/helpers/format-short-date'
 
 // Standard condition used by almost all filters
 const condition = (startDate, endDate, task) => task.targetDate >= startDate && task.targetDate < endDate
@@ -57,20 +53,6 @@ const dateFilters = [
         : getStartOfDay(checkDate.setDate(checkDate.getDate() + (7 - checkDate.getDay())))
     }
   },
-  // {
-  //   key: dateFilters.THISWEEK,
-  //   description: 'This Week',
-  //   condition,
-  //   startDate: () => {
-  //     return getStartOfDay(new Date())
-  //   },
-  //   finishDate: () => {
-  //     let checkDate = new Date()
-  //     return checkDate.getDay() === 0
-  //       ? getStartOfDay(checkDate)
-  //       : getStartOfDay(checkDate.setDate(checkDate.getDate() + (7 - checkDate.getDay())))
-  //   }
-  // },
   {
     key: 'NEXT_WEEK',
     description: 'Next Week',
@@ -89,19 +71,19 @@ const dateFilters = [
       return getStartOfDay((new Date(startDate)).setDate(startDate.getDate() + 7))
     }
   },
-  // {
-  //   key: dateFilters.ALL,
-  //   description: 'All Tasks',
-  //   condition: (startDate, _endDate, task) => {
-  //     return task.targetDate >= startDate || task.targetDate == null
-  //   },
-  //   startDate: () => {
-  //     return getStartOfDay(new Date())
-  //   },
-  //   finishDate: (startDate) => {
-  //     // no-op
-  //   }
-  // }
+  {
+    key: 'ALL',
+    description: 'All Tasks',
+    condition: (startDate, _endDate, task) => {
+      return task.targetDate >= startDate || task.targetDate == null
+    },
+    startDate: () => {
+      return getStartOfDay(new Date())
+    },
+    finishDate: (startDate) => {
+      // no-op
+    }
+  }
 ]
 
 function filterTasksByQueryKey (tasks, queryKey = 'TODAY', startDate = null, finishDate = null) {
@@ -122,70 +104,6 @@ function filterTasksByQueryKey (tasks, queryKey = 'TODAY', startDate = null, fin
     })
 }
 
-// function filterTasksByTags (tasks, tags) {
-//   if (!tasks || !tasks.length) return []
-//
-//   const filteredTasks = !tags || !tags.length || !tags.any(tag => !tag.show)
-//     ? tasks.map(task => task)
-//     : tasks.filter(task => task.tags.any(tag => tag.show))
-//
-//   return filteredTasks
-//   // sort based on priority.  Note, not all tasks may have priority
-//   // const sorted = filteredTasks.sort((taskA, taskB) => {
-//   //   const priorityA = taskA.priority
-//   //   const priorityB = taskB.priority
-//   //
-//   //   // Handle null scenarios
-//   //   if (priorityA == null && priorityB != null) return 1
-//   //   if (priorityA != null && priorityB == null) return -1
-//   //   if (priorityA == null && priorityB == null) return 0
-//   //
-//   //   return priorityA - priorityB
-//   // })
-//   // return sorted
-// }
-//
-// function orderTasksByDate (tasks) {
-//   const sorted = tasks.sort((taskA, taskB) => {
-//     const targetA = taskA.targetDate
-//     const targetB = taskB.targetDate
-//
-//     if (targetA == null && targetB != null) return 1
-//     if (targetA != null && targetB == null) return -1
-//     if (targetA == null && targetB == null) return 0
-//
-//     return targetA.getTime() - targetB.getTime()
-//   })
-//
-//   return sorted
-// }
 
-// function getTitle (queryKey = dateFilters.TODAY) {
-//   const filter = queueConfig.find(item => item.key === queryKey)
-//   let desc = filter.description
-//   if (_includes(desc, '%s') || _includes(desc, '%f')) {
-//     const startDate = filter.startDate()
-//     desc = desc.replace('%s', formatShortDate([startDate]))
-//     desc = desc.replace('%f', formatShortDate([filter.finishDate(startDate)]))
-//   }
-//   return desc
-// }
 
-/**
- * Get all the Queues that this task belongs to
- * @param task
- * @returns {Array}
- */
-// function getTasksQueues (task) {
-//   const matchedQueues = Object.keys(dateFilters).reduce((acc, key) => {
-//     const results = filterTasksByQueue([task], dateFilters[key])
-//     if (results && results.length) {
-//       acc.push(key)
-//     }
-//     return acc
-//   }, [])
-//
-//   return matchedQueues
-// }
-
-export { filterTasksByQueryKey/*, filterTasksByTags, getTitle, orderTasksByDate, getTasksQueues */}
+export { filterTasksByQueryKey }

@@ -1,9 +1,0 @@
-{{#if @onClick}}
-  <span {{on "click" @onClick}} class="cursor-pointer">
-    <Icon::Svg @title={{@title}} @key={{@key}} ...attributes />
-  </span>
-{{else}}
-  <span>
-    <Icon::Svg @title={{@title}} @key={{@key}} ...attributes />
-  </span>
-{{/if}}
