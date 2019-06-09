@@ -4,7 +4,7 @@ const { Model, attr } = DS;
 export default class TaskModel extends Model {
   @attr('string') description;
   @attr('string') detail;
-  @attr('date') targetDate;
+  @attr('date', {defaultValue: () => new Date()}) targetDate;
   @attr('date') completedAt;
   @attr('number') priority;
   @attr('boolean') onCalendar;

@@ -2,26 +2,70 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import resize from 'ember-animated/motions/resize';
+import { inject as service } from '@ember/service';
+import { next } from '@ember/runloop';
 
 export default class Task extends Component {
+  @service store
+
   @tracked isEditingTask = false
   @tracked showDetail = false
+  @tracked editTask
+  @tracked minimalEdit
+  detailTextArea
 
   constructor() {
     super(...arguments)
-    // todo: keep this in for when I can get animated-if working
-    // this.resize = resize
+    this.isEditingTask = this.minimalEdit = !this.args.task.id
   }
 
   @action
-  toggleShowTask() {
-    this.taskExpanded = !this.taskExpanded
+  async saveTask() {
+    await this.args.saveTask()
+    this.isEditingTask = false;
+    this.minimalEdit = false;
+  }
+
+
+  @action
+  toggleShowDetail() {
+    this.showDetail = !this.showDetail
   }
 
   @action
   toggleEditTask() {
+    if (this.isEditingTask) {
+      // If editing a task and toggling to not editing, rollback any unsaved attributes
+      this.args.task.rollbackAttributes()
+      if (this.args.task.isDeleted) {
+        this.args.removeTask();
+        return;
+      }
+    }
+
+
     this.isEditingTask = !this.isEditingTask
-    if (!this.isEditingTask) this.temporaryTask = {}
+  }
+
+  @action
+  async onKeyDown(e) {
+    if (e.key === 'Enter') {
+      this.updateTask('description', e)
+      await this.saveTask();
+    } else if (e.key === 'Tab') {
+      e.preventDefault()
+      this.updateTask('description', e)
+      this.minimalEdit = false;
+
+      next(this, () => {
+        this.detailTextArea.focus()
+      })
+    }
+  }
+
+  @action
+  updateTask(taskProperty, e) {
+    this.args.task[taskProperty] = e.target.value
   }
 
    *resize ({ insertedSprites, removedSprites, keptSprites }) {
@@ -38,5 +82,6 @@ export default class Task extends Component {
        resize(sprite);
     });
   }
+
 
 }

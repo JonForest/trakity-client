@@ -42,6 +42,8 @@ export default {
   'orange-light': '#faad63',
   'orange-lighter': '#fcd9b6',
   'orange-lightest': '#fff5eb',
+  'orange-button': '#FBA421',
+
 
   'yellow-darkest': '#453411',
   'yellow-darker': '#684f1d',

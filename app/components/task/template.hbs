@@ -2,38 +2,50 @@
   <li class="list-reset bg-blue-darker text-white rounded my-3 pb-1 pt-2 px-1 text-sm font-system-ui">
     <div class="flex">
       <div class="flex-auto font-sans">
-        <input class="appearance-none w-full mb-4 rounded-sm bg-blue-lightest text-blue-darkest p-2" value={{@task.description}}>
+        {{#if this.minimalEdit}}
+          <input class="appearance-none w-full mb-4 rounded-sm bg-blue-lightest text-blue-darkest p-2"
+            {{on "keydown" this.onKeyDown}}
+            {{on "change" (fn this.updateTask "description")}}
+             value={{@task.description}}
+          >
+        {{else}}
+          <input class="appearance-none w-full mb-4 rounded-sm bg-blue-lightest text-blue-darkest p-2"
+                 {{on "change" (fn this.updateTask "description")}}
+             value={{@task.description}}>
 
-        {{#if @task.detail}}
-          <textarea class="appearance-none rounded-sm w-full h-24 bg-blue-lightest text-blue-darkest p-2">{{@task.detail}}</textarea>
+          <textarea
+            class="appearance-none rounded-sm w-full h-24 bg-blue-lightest text-blue-darkest p-2"
+            {{ref this "detailTextArea"}}
+            {{on "change" (fn this.updateTask "detail")}}
+          >{{@task.detail}}</textarea>
         {{/if}}
 
       </div>
 
-      {{#if @task.detail}}
-        <div class="px-2">
-          <Icon @key="taskDetail" @title="task detail" class="fill-current text-grey h-4" />
-        </div>
-      {{/if}}
-      <div class="px-2">
-        <Icon @key="edit" @title="edit task" class="fill-current text-white h-4" @onClick={{this.toggleEditTask}}/>
-      </div>
-      <div class="px-2">
-        <Icon @key="tick" @title="complete task" class="fill-current text-grey h-4"/>
-      </div>
+      <Task::TaskActions
+        @task={{@this.editTask}}
+        @toggleEditTask={{this.toggleEditTask}}
+        @uncompleteTask={{fn @completeTask false}}
+        @completeTask={{fn @completeTask true}}
+        @toggleDetail={{fn (mut this.showDetail) (not this.showDetail)}}
+      />
     </div>
 
-    <div class="flex flex-row-reverse my-2 mr-2">
-      <div>
-        <button class="w-20 bg-blue-darkest shadow text-grey-lightest p-1 rounded underline">Save</button>
+    {{#unless this.minimalEdit}}
+      <div class="flex flex-row-reverse my-2 mr-2">
+        <div>
+          <button class="w-20 bg-blue-darkest shadow text-grey-lightest p-1 rounded underline"
+            {{on 'click' this.saveTask}}
+          >Save</button>
+        </div>
+        <div>
+          <button class="w-20 bg-grey-darkest shadow  mx-3 p-1 text-grey-lightest rounded underline">Delete</button>
+        </div>
+        <div>
+          <button class="bg-transparent border-none text-grey-lightest underline p-1" {{on "click" this.toggleEditTask}}>Cancel</button>
+        </div>
       </div>
-      <div>
-        <button class="w-20 bg-grey-darkest shadow  mx-3 p-1 text-grey-lightest rounded underline">Delete</button>
-      </div>
-      <div>
-        <button class="bg-transparent border-none text-grey-lightest underline p-1" {{on "click" this.toggleEditTask}}>Cancel</button>
-      </div>
-    </div>
+    {{/unless}}
 
   </li>
 {{else}}
@@ -41,24 +53,13 @@
     <div class="flex">
       <div class="flex-auto font-sans">{{@task.description}}</div>
 
-      {{#if @task.detail}}
-        <div class="px-2">
-          <Icon @key="taskDetail" @title="task detail" class="fill-current text-white h-4" @onClick={{fn (mut this.showDetail) (not this.showDetail) }} />
-        </div>
-      {{/if}}
-
-      {{#if @task.completedAt}}
-        <div class="px-2">
-          <Icon @key="redo" @title="Re-enable task" class="fill-current text-white h-4" @onClick={{fn @completeTask false}} />
-        </div>
-      {{else}}
-        <div class="px-2">
-          <Icon @key="edit" @title="edit task" class="fill-current text-white h-4" @onClick={{this.toggleEditTask}} />
-        </div>
-        <div class="px-2">
-          <Icon @key="tick" @title="complete task" class="fill-current text-white h-4" @onClick={{fn @completeTask true}} />
-        </div>
-      {{/if}}
+      <Task::TaskActions
+        @task={{@task}}
+        @toggleEditTask={{this.toggleEditTask}}
+        @uncompleteTask={{fn @completeTask false}}
+        @completeTask={{fn @completeTask true}}
+        @toggleDetail={{fn (mut this.showDetail) (not this.showDetail)}}
+      />
     </div>
 
     <AnimatedContainer>
@@ -70,3 +71,4 @@
     </AnimatedContainer>
   </li>
 {{/if}}
+

@@ -29,5 +29,7 @@ export default function() {
   })
 
   this.patch('/tasks/:id');
+
+  this.post('/tasks');
 }
 
