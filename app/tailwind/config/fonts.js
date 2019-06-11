@@ -1,4 +1,4 @@
-/*
+  /*
 |-----------------------------------------------------------------------------
 | Fonts                                    https://tailwindcss.com/docs/fonts
 |-----------------------------------------------------------------------------
@@ -19,11 +19,11 @@
 
  export default {
   'sans': [
+    'Roboto',
     'system-ui',
     'BlinkMacSystemFont',
     '-apple-system',
     'Segoe UI',
-    'Roboto',
     'Oxygen',
     'Ubuntu',
     'Cantarell',
