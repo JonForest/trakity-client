@@ -1,5 +1,11 @@
-<ul>
-  {{#each this.model as |task|}}
-    <li>{{task.description}}</li>
-  {{/each}}
-</ul>
+<div class="flex flex-col-reverse lg:flex-row p-2">
+  <div class="w-1/2 lg:w-full">
+    <DashboardTaskLists @tasks={{this.model}} />
+  </div>
+  <div class="w-1/2 lg:w-full mr-4">
+    <ContentPanel as |Header|>
+      <Header>&lt;&lt; Today &gt;&gt;</Header>
+      <img src="images/calendar.png">
+    </ContentPanel>
+  </div>
+</div>

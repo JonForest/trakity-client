@@ -1,0 +1,6 @@
+<ContentPanel as |Header|>
+  <Header>Today (4)</Header>
+  {{#each @tasks as |task|}}
+    <Task @task={{task}} />
+  {{/each}}
+</ContentPanel>
