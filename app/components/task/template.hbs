@@ -2,10 +2,11 @@
   <li class="list-reset bg-blue-darker text-white rounded my-3 pb-1 pt-2 px-1 text-sm font-system-ui">
     <div class="flex">
       <div class="flex-auto font-sans">
-        {{#if this.minimalEdit}}
+        {{#if (not this.showDetail)}}
           <input class="appearance-none w-full mb-4 rounded-sm bg-blue-lightest text-blue-darkest p-2"
             {{on "keydown" this.onKeyDown}}
             {{on "change" (fn this.updateTask "description")}}
+            {{ref this "descriptionInput"}}
              value={{@task.description}}
           >
         {{else}}
@@ -23,7 +24,7 @@
       </div>
 
       <Task::TaskActions
-        @task={{@this.editTask}}
+        @task={{@task}}
         @toggleEditTask={{this.toggleEditTask}}
         @uncompleteTask={{fn @completeTask false}}
         @completeTask={{fn @completeTask true}}
@@ -31,7 +32,7 @@
       />
     </div>
 
-    {{#unless this.minimalEdit}}
+    {{#if this.showDetail}}
       <div class="flex flex-row-reverse my-2 mr-2">
         <div>
           <button class="w-20 bg-blue-darkest shadow text-grey-lightest p-1 rounded underline"
@@ -39,13 +40,13 @@
           >Save</button>
         </div>
         <div>
-          <button class="w-20 bg-grey-darkest shadow  mx-3 p-1 text-grey-lightest rounded underline">Delete</button>
+          <button class="w-20 bg-grey-darkest shadow  mx-3 p-1 text-grey-lightest rounded underline" {{on "click" this.deleteTask}}>Delete</button>
         </div>
         <div>
-          <button class="bg-transparent border-none text-grey-lightest underline p-1" {{on "click" this.toggleEditTask}}>Cancel</button>
+          <button class="bg-transparent border-transparent text-grey-lightest underline p-1" {{on "click" this.toggleEditTask}}>Cancel</button>
         </div>
       </div>
-    {{/unless}}
+    {{/if}}
 
   </li>
 {{else}}

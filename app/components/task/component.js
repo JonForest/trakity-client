@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import resize from 'ember-animated/motions/resize';
 import { inject as service } from '@ember/service';
-import { next } from '@ember/runloop';
+import { later } from '@ember/runloop';
 
 export default class Task extends Component {
   @service store
@@ -11,19 +11,38 @@ export default class Task extends Component {
   @tracked isEditingTask = false
   @tracked showDetail = false
   @tracked editTask
-  @tracked minimalEdit
   detailTextArea
 
   constructor() {
     super(...arguments)
-    this.isEditingTask = this.minimalEdit = !this.args.task.id
+    this.isEditingTask = !this.args.task.id
+    if (this.args.task.id == null) {
+      // Delay this, as animations need to take place for this new element to be ready
+      later(this, () => {
+        this.descriptionInput.focus()
+      }, 300)
+    }
+  }
+
+  *resize ({ insertedSprites, removedSprites, keptSprites }) {
+    insertedSprites.forEach(sprite => {
+      resize(sprite, { fromHeight: 0 });
+    });
+    removedSprites.forEach(sprite => {
+      resize(sprite, { toHeight: 0 });
+    });
+    keptSprites.forEach(sprite => {
+       // this one needs no args because it already has a natural
+       // initial and final size. This case comes up if you interrupt
+       // a running animation.
+       resize(sprite);
+    });
   }
 
   @action
   async saveTask() {
     await this.args.saveTask()
     this.isEditingTask = false;
-    this.minimalEdit = false;
   }
 
 
@@ -34,6 +53,13 @@ export default class Task extends Component {
 
   @action
   toggleEditTask() {
+    // When this is a new task, clicking on the edit icon collapses between description only or showing all properties
+    if (!this.args.task.id) {
+      this.showDetail = !this.showDetail
+      return
+    }
+
+
     if (this.isEditingTask) {
       // If editing a task and toggling to not editing, rollback any unsaved attributes
       this.args.task.rollbackAttributes()
@@ -55,7 +81,7 @@ export default class Task extends Component {
     } else if (e.key === 'Tab') {
       e.preventDefault()
       this.updateTask('description', e)
-      this.minimalEdit = false;
+      this.showDetail = true
 
       next(this, () => {
         this.detailTextArea.focus()
@@ -68,20 +94,9 @@ export default class Task extends Component {
     this.args.task[taskProperty] = e.target.value
   }
 
-   *resize ({ insertedSprites, removedSprites, keptSprites }) {
-    insertedSprites.forEach(sprite => {
-      resize(sprite, { fromHeight: 0 });
-    });
-    removedSprites.forEach(sprite => {
-      resize(sprite, { toHeight: 0 });
-    });
-    keptSprites.forEach(sprite => {
-       // this one needs no args because it already has a natural
-       // initial and final size. This case comes up if you interrupt
-       // a running animation.
-       resize(sprite);
-    });
+  @action
+  async deleteTask() {
+    await this.args.task.destroyRecord()
+    this.args.removeTask();
   }
-
-
 }

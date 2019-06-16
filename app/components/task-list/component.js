@@ -13,7 +13,8 @@ export default class TaskList extends Component {
   constructor() {
     super(...arguments)
     this.tasks = this.args.tasks
-    this.tasks.push(this.store.createRecord('task'))
+    // Only create a task in the primary list
+    if (this.args.primary) this.tasks.push(this.store.createRecord('task'))
   }
 
   get completedTasks() {
@@ -52,6 +53,10 @@ export default class TaskList extends Component {
   @action
   async saveTask(task) {
     await task.save();
+    if (this.uncompletedTasks.filter(task => !task.id).length === 0) {
+      this.tasks.push(this.store.createRecord('task'))
+      this.tasks = this.tasks
+    }
   }
 
   @action removeTask(task) {
@@ -75,6 +80,9 @@ export default class TaskList extends Component {
       //   fadeIn(sprite);
       // }
 
+    for (let sprite of removedSprites) {
+      fadeOut(sprite)
+    }
 
     keptSprites.forEach(sprite => {
       move(sprite);
@@ -86,10 +94,6 @@ export default class TaskList extends Component {
 
     for (let sprite of sentSprites) {
       sprite.moveToFinalPosition();
-    }
-
-    for (let sprite of removedSprites) {
-      fadeOut(sprite)
     }
   }
 

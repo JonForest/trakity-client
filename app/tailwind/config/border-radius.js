@@ -20,5 +20,7 @@ export default {
   'sm': '.125rem',
   default: '.25rem',
   'lg': '.5rem',
+  'xlg': '1rem',
+  'xxlg': '2rem',
   'full': '9999px',
 };

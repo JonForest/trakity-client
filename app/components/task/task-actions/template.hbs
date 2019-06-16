@@ -1,7 +1,11 @@
 
-{{#if @task.detail}}
+{{#if (or @task.detail)}}
   <div class="px-2">
-    <Icon @key="taskDetail" @title="task detail" class="fill-current text-white h-4" @onClick={{@toggleDetail}} />
+    <button><Icon @key="taskDetail" @title="task detail" class="fill-current text-white h-4" @onClick={{@toggleDetail}} /></button>
+  </div>
+{{else}}
+  <div class="px-2">
+    <Icon @key="taskDetail" @title="task detail" class="fill-current text-grey h-4" />
   </div>
 {{/if}}
 
@@ -14,6 +18,10 @@
     <Icon @key="edit" @title="edit task" class="fill-current text-white h-4" @onClick={{@toggleEditTask}} />
   </div>
   <div class="px-2">
-    <Icon @key="tick" @title="complete task" class="fill-current text-white h-4" @onClick={{@completeTask}} />
+    {{#if @task.id}}
+      <Icon @key="tick" @title="complete task" class="fill-current text-white h-4" @onClick={{@completeTask}} />
+    {{else}}
+      <Icon @key="tick" @title="complete task" class="fill-current text-grey h-4" />
+    {{/if}}
   </div>
 {{/if}}
