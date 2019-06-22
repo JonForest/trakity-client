@@ -14,6 +14,7 @@ x. Controls for each task are not keyboard accessible.
 * Want to be able to expand/contract the minimal edit task in a way that doesn't just need the tab key during edit (16/06/19)
 * Saving a minimal edit task should create a new minimal edit task. (16/06/19)
 * Adding a minimal edit task and hitting 'enter' to save, should move the focus into the next minimal edit task (16/06/19)
+* Edit of an existing task should open in full edit mode (23/06/19)
 
 
 

@@ -42,7 +42,7 @@ export default class Task extends Component {
   @action
   async saveTask() {
     await this.args.saveTask()
-    this.isEditingTask = false;
+    this.toggleEditTask()
   }
 
 
@@ -69,8 +69,7 @@ export default class Task extends Component {
       }
     }
 
-
-    this.isEditingTask = !this.isEditingTask
+    this.isEditingTask = this.showDetail = !this.isEditingTask
   }
 
   @action
@@ -83,9 +82,10 @@ export default class Task extends Component {
       this.updateTask('description', e)
       this.showDetail = true
 
-      next(this, () => {
+      // Once the text area is drawn, add the focus
+      later(this, () => {
         this.detailTextArea.focus()
-      })
+      }, 50) // Need some repainting to have finished
     }
   }
 

@@ -2,9 +2,8 @@
   <DashboardPanel>
 
     <TaskList::Title
-      @title={{@title}}
       @count={{uncompletedTaskCount}} {{!-- todo: this count shouldn't include unsaved tasks --}}
-    />
+    >{{@title}}</TaskList::Title>
     <AnimatedContainer>
       <AnimatedContainer>
         <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
