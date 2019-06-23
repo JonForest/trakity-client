@@ -10,15 +10,33 @@
              value={{@task.description}}
           >
         {{else}}
-          <input class="appearance-none w-full mb-4 rounded-sm bg-blue-lightest text-blue-darkest p-2"
+          <input class="appearance-none w-full rounded-sm bg-blue-lightest text-blue-darkest p-2 mb-4"
                  {{on "change" (fn this.updateTask "description")}}
              value={{@task.description}}>
 
           <textarea
-            class="appearance-none rounded-sm w-full h-24 bg-blue-lightest text-blue-darkest p-2"
+            class="appearance-none rounded-sm w-full h-24 bg-blue-lightest text-blue-darkest p-2 mb-4"
             {{ref this "detailTextArea"}}
             {{on "change" (fn this.updateTask "detail")}}
           >{{@task.detail}}</textarea>
+
+          <div class="flex justify-between">
+            <EmberFlatpickr class="rounded-sm bg-blue-lightest text-blue-darkest pl-2 mb-4 mr-8 w-3/4 h-16 rounded border-2 text-lg"
+              @altInput={{true}}
+              @altFormat="J F, Y h i K"
+              @enableTime={{true}}
+              @date={{readonly @task.targetDate}}
+              @onChange={{this.selectDate}}
+              @placeholder={{"Pick date"}}
+              @minDate={{this.minDate}}
+            />
+            {{!--
+            <ShowOnCalendar
+              @checked={{@task.onCalendar}}
+              @onClick={{fn (mut @task.onCalendar)}}
+            />
+            --}}
+          </div>
         {{/if}}
 
       </div>

@@ -4591,9 +4591,9 @@ ember-source-channel-url@^1.1.0:
   dependencies:
     got "^8.0.1"
 
-"ember-source@https://s3.amazonaws.com/builds.emberjs.com/canary/shas/1cb5f677e6d980b6e14986b5fdf1f98536f5a214.tgz":
+"ember-source@https://s3.amazonaws.com/builds.emberjs.com/canary/shas/da551b3f0978bf81f8ae81cbfc33255523c7018f.tgz":
   version "3.12.0-canary"
-  resolved "https://s3.amazonaws.com/builds.emberjs.com/canary/shas/1cb5f677e6d980b6e14986b5fdf1f98536f5a214.tgz#a556a10ee7bf56f943fcbe67f0627f9389adc32c"
+  resolved "https://s3.amazonaws.com/builds.emberjs.com/canary/shas/da551b3f0978bf81f8ae81cbfc33255523c7018f.tgz#4a1ace2b3c701f9833f475ac7eea3ec8ffc00bf2"
   dependencies:
     broccoli-funnel "^2.0.2"
     broccoli-merge-trees "^3.0.2"

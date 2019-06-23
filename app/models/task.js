@@ -1,11 +1,12 @@
 import DS from 'ember-data';
+import { getStartOfDay } from '../utils/date-funcs'
 const { Model, attr } = DS;
 
 export default class TaskModel extends Model {
   @attr('string') description;
   @attr('string') detail;
-  @attr('date', {defaultValue: () => new Date()}) targetDate;
+  @attr('date', {defaultValue: () => getStartOfDay(new Date())}) targetDate;
   @attr('date') completedAt;
   @attr('number') priority;
-  @attr('boolean') onCalendar;
+  @attr('boolean', {defaultValue: false}) onCalendar;
 }

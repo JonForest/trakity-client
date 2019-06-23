@@ -29,6 +29,13 @@ export default class TaskList extends Component {
     return this.uncompletedTasks.filter(task => !!task.id).length
   }
 
+  _addNewTask() {
+    if (this.uncompletedTasks.filter(task => !task.id).length === 0) {
+      this.tasks.push(this.store.createRecord('task'))
+    }
+    this.tasks = this.tasks
+  }
+
   @action
   async completeTask(task, isComplete) {
     // Need .set as an Ember Data model
@@ -53,16 +60,13 @@ export default class TaskList extends Component {
   @action
   async saveTask(task) {
     await task.save();
-    if (this.uncompletedTasks.filter(task => !task.id).length === 0) {
-      this.tasks.push(this.store.createRecord('task'))
-      this.tasks = this.tasks
-    }
+    this._addNewTask()
   }
 
   @action removeTask(task) {
     let taskIndex = this.tasks.indexOf(task);
     this.tasks.splice(taskIndex, 1);
-    this.tasks = this.tasks
+    this._addNewTask()
   }
 
 
@@ -81,6 +85,7 @@ export default class TaskList extends Component {
       // }
 
     for (let sprite of removedSprites) {
+      //todo: want to yield this, but need to control the animations in the other list somehow
       fadeOut(sprite)
     }
 

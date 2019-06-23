@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import resize from 'ember-animated/motions/resize';
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
+import { getStartOfDay } from '../../utils/date-funcs'
 
 export default class Task extends Component {
   @service store
@@ -11,6 +12,7 @@ export default class Task extends Component {
   @tracked isEditingTask = false
   @tracked showDetail = false
   @tracked editTask
+  @tracked minDate = getStartOfDay(new Date())
   detailTextArea
 
   constructor() {
@@ -72,6 +74,7 @@ export default class Task extends Component {
     this.isEditingTask = this.showDetail = !this.isEditingTask
   }
 
+
   @action
   async onKeyDown(e) {
     if (e.key === 'Enter') {
@@ -97,6 +100,17 @@ export default class Task extends Component {
   @action
   async deleteTask() {
     await this.args.task.destroyRecord()
+    // todo: thing this would be better to explicitly pass in the task rather than curry it earlier
     this.args.removeTask();
+  }
+
+  @action
+  selectDate([date]) {
+    this.args.task.targetDate = date
+  }
+
+  @action
+  selectCalendar() {
+    debugger
   }
 }

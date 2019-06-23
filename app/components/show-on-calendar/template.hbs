@@ -1,0 +1,9 @@
+<button class="w-16 h-16 rounded-lg border-2 flex items-center text-blue-darkest
+  {{if @checked "bg-green-lightest border-green-dark " "bg-blue-lightest border-blue-dark"}}
+"
+  {{on "click" (fn @onClick (not @checked))}}
+>
+  <div class="text-center">
+    {{if @checked "Remove from calendar" "Add to calendar"}}
+  </div>
+</button>

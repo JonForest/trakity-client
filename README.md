@@ -1,8 +1,7 @@
 #TODO
-* Canceling a new task should clear values and return it to 'minimal' state
+* Changing date should move the task into another list
 * Deleting a new task should clear values and return it to a 'minimal' state
-*. Wire up the Add Task button. That should move focus into the current minimal task and expand
-4. Keyboard controls wired up
+*. Keyboard controls wired up
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
@@ -15,6 +14,9 @@ x. Controls for each task are not keyboard accessible.
 * Saving a minimal edit task should create a new minimal edit task. (16/06/19)
 * Adding a minimal edit task and hitting 'enter' to save, should move the focus into the next minimal edit task (16/06/19)
 * Edit of an existing task should open in full edit mode (23/06/19)
+* Canceling a new task should clear values and return it to 'minimal' state (23/06/19)
+* Use can select a date when editing a task
+* Target date should be limited to today and after
 
 
 
