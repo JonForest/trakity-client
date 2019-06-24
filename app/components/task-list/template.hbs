@@ -8,7 +8,7 @@
       <AnimatedContainer>
         <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
           {{#animated-each this.uncompletedTasks use=this.transition duration=750 as |task|}}
-              <Task @task={{task}} @completeTask={{fn this.completeTask task}} @saveTask={{fn this.saveTask task}} @removeTask={{fn this.removeTask task}}></Task>
+              <Task @task={{task}} @completeTask={{fn this.completeTask task}} @saveTask={{fn this.saveTask}} @removeTask={{fn this.removeTask task}}></Task>
           {{/animated-each}}
         </ul>
       </AnimatedContainer>

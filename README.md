@@ -1,11 +1,15 @@
 #TODO
-* Changing date should move the task into another list
+* Import calendar control
+* Investigate how to hook up an external calendar - within Calendar control
+* Investigate how to integrate with Google Calendar
+* Investigate how to add calendar items from the UI
+* Investigate how to add/update items back into remote calendar
 * Deleting a new task should clear values and return it to a 'minimal' state
 *. Keyboard controls wired up
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
-  
+* Changing the date on a task should have it animate to it's new home  
 x. Consider refactoring out 'minimalEdit'
 x. Controls for each task are not keyboard accessible. 
 
@@ -17,6 +21,8 @@ x. Controls for each task are not keyboard accessible.
 * Canceling a new task should clear values and return it to 'minimal' state (23/06/19)
 * Use can select a date when editing a task
 * Target date should be limited to today and after
+* Editing a task should create a temp version, or changeset, so that updates don't immediately impact (e.g. changing date moves the task to another day before save) (25/06/19)
+* Changing date should move the task into another list (25/06/19)
 
 
 

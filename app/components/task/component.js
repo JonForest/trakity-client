@@ -5,6 +5,8 @@ import resize from 'ember-animated/motions/resize';
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
 import { getStartOfDay } from '../../utils/date-funcs'
+import Changeset from 'ember-changeset'
+
 
 export default class Task extends Component {
   @service store
@@ -18,6 +20,9 @@ export default class Task extends Component {
   constructor() {
     super(...arguments)
     this.isEditingTask = !this.args.task.id
+    if (this.isEditingTask) {
+      this.editTask = new Changeset(this.args.task)
+    }
     if (this.args.task.id == null) {
       // Delay this, as animations need to take place for this new element to be ready
       later(this, () => {
@@ -43,7 +48,7 @@ export default class Task extends Component {
 
   @action
   async saveTask() {
-    await this.args.saveTask()
+    await this.args.saveTask(this.editTask)
     this.toggleEditTask()
   }
 
@@ -61,14 +66,17 @@ export default class Task extends Component {
       return
     }
 
-
     if (this.isEditingTask) {
       // If editing a task and toggling to not editing, rollback any unsaved attributes
-      this.args.task.rollbackAttributes()
-      if (this.args.task.isDeleted) {
-        this.args.removeTask();
-        return;
-      }
+      // this.args.task.rollbackAttributes()
+      // if (this.args.task.isDeleted) {
+      //   this.args.removeTask();
+      //   return;
+      // }
+      this.editTask = null
+    } else {
+      // Moving from non-editing to editing, create a working copy of the task
+      this.editTask = new Changeset(this.args.task)
     }
 
     this.isEditingTask = this.showDetail = !this.isEditingTask
@@ -106,7 +114,7 @@ export default class Task extends Component {
 
   @action
   selectDate([date]) {
-    this.args.task.targetDate = date
+    this.editTask.targetDate = date
   }
 
   @action

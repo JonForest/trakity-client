@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import move from 'ember-animated/motions/move';
 import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
 import { inject as service } from '@ember/service';
@@ -8,21 +7,18 @@ import { inject as service } from '@ember/service';
 export default class TaskList extends Component {
   @service store
 
-  @tracked tasks
-
   constructor() {
     super(...arguments)
-    this.tasks = this.args.tasks
     // Only create a task in the primary list
-    if (this.args.primary) this.tasks.push(this.store.createRecord('task'))
+    if (this.args.primary) this.args.tasks.push(this.store.createRecord('task'))
   }
 
   get completedTasks() {
-    return this.tasks.filter(task => task.completedAt != null)
+    return this.args.tasks.filter(task => task.completedAt != null)
   }
 
   get uncompletedTasks() {
-    return this.tasks.filter(task => task.completedAt == null)
+    return this.args.tasks.filter(task => task.completedAt == null)
   }
 
   get uncompletedTaskCount() {
@@ -31,9 +27,8 @@ export default class TaskList extends Component {
 
   _addNewTask() {
     if (this.uncompletedTasks.filter(task => !task.id).length === 0) {
-      this.tasks.push(this.store.createRecord('task'))
+      this.args.tasks.push(this.store.createRecord('task'))
     }
-    this.tasks = this.tasks
   }
 
   @action
@@ -42,30 +37,29 @@ export default class TaskList extends Component {
     const rollbackSetting = task.completedAt
     task.set('completedAt', isComplete ? new Date() :  null)
 
-    // Need to set back to itself to trigger the setter and the animation
-    // Note, triggering this before the save so there is no delay on the animation while the save happens.
-    this.tasks = this.tasks
-
     try {
-      await task.save()
+      await this.saveTask(task)
     } catch (e) {
       console.error(e)
       // Save failed. Reset the value and reverse the animation
       task.set('completedAt', rollbackSetting)
-      this.tasks = this.tasks
     }
   }
 
-  // TODO: not sure yet if I need to keep these here
+  /**
+   * @param task {Object} - Ember Data Model _or_ an Ember ChangeSet. Both have the same `save` API
+   * @returns {Promise<void>}
+   */
   @action
   async saveTask(task) {
+
     await task.save();
     this._addNewTask()
   }
 
   @action removeTask(task) {
-    let taskIndex = this.tasks.indexOf(task);
-    this.tasks.splice(taskIndex, 1);
+    let taskIndex = this.args.tasks.indexOf(task);
+    this.args.tasks.splice(taskIndex, 1);
     this._addNewTask()
   }
 
