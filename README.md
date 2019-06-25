@@ -1,15 +1,21 @@
 #TODO
-* Import calendar control
+* Import calendar control (https://fullcalendar.io/docs/getting-started)
 * Investigate how to hook up an external calendar - within Calendar control
-* Investigate how to integrate with Google Calendar
+* Investigate how to integrate with Google Calendar 
+   - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
+   - https://developers.google.com/calendar/caldav/v2/guide
+   - https://console.developers.google.com/apis/api/caldav.googleapis.com/overview?project=trakity&authuser=1&supportedpurview=project
+   - https://stackoverflow.com/questions/22911963/using-the-caldav-api-for-google-calender
 * Investigate how to add calendar items from the UI
 * Investigate how to add/update items back into remote calendar
+* Add in Ember Embroider
 * Deleting a new task should clear values and return it to a 'minimal' state
 *. Keyboard controls wired up
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
-* Changing the date on a task should have it animate to it's new home  
+* Changing the date on a task should have it animate to it's new home
+* Do we want Tags in this version?  
 x. Consider refactoring out 'minimalEdit'
 x. Controls for each task are not keyboard accessible. 
 
@@ -24,6 +30,18 @@ x. Controls for each task are not keyboard accessible.
 * Editing a task should create a temp version, or changeset, so that updates don't immediately impact (e.g. changing date moves the task to another day before save) (25/06/19)
 * Changing date should move the task into another list (25/06/19)
 
+
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:132456-34365
+SUMMARY:Weekly meeting
+DTSTART:20120101T120000
+DURATION:PT1H
+RRULE:FREQ=WEEKLY
+END:VEVENT
+END:VCALENDAR
 
 
 //    todo: try adding the action back onto the <Icon and see if it now throws?
