@@ -8,6 +8,10 @@ module.exports = function(defaults) {
     // Add options here
   });
 
+  app.import('node_modules/@fullcalendar/core/main.css');
+  // app.import('node_modules/@fullcalendar/daygrid/main.css');
+  app.import('node_modules/@fullcalendar/timegrid/main.css');
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
