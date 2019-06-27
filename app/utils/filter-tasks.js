@@ -5,7 +5,7 @@ import { getStartOfDay } from './date-funcs'
 // import { formatShortDate } from 'client/helpers/format-short-date'
 
 // Standard condition used by almost all filters
-const condition = (startDate, endDate, task) => task.targetDate >= startDate && task.targetDate < endDate
+const condition = (startDate, endDate, task) => task.startDate >= startDate && task.startDate < endDate
 
 const dateFilters = [
   {
@@ -93,7 +93,7 @@ const dateFilters = [
   //   key: dateFilters.ALL,
   //   description: 'All Tasks',
   //   condition: (startDate, _endDate, task) => {
-  //     return task.targetDate >= startDate || task.targetDate == null
+  //     return task.startDate >= startDate || task.startDate == null
   //   },
   //   startDate: () => {
   //     return getStartOfDay(new Date())
@@ -147,8 +147,8 @@ function filterTasksByQueryKey (tasks, queryKey = 'TODAY', startDate = null, fin
 //
 // function orderTasksByDate (tasks) {
 //   const sorted = tasks.sort((taskA, taskB) => {
-//     const targetA = taskA.targetDate
-//     const targetB = taskB.targetDate
+//     const targetA = taskA.startDate
+//     const targetB = taskB.startDate
 //
 //     if (targetA == null && targetB != null) return 1
 //     if (targetA != null && targetB == null) return -1

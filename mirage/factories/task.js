@@ -9,7 +9,7 @@ export default Factory.extend({
       ? faker.lorem.paragraph()
       : null
   },
-  targetDate() {
+  startDate() {
     const today = new Date()
     const plusDate = Math.floor(Math.random() * 7)
     return new Date(today.setDate(today.getDate() + plusDate))
@@ -25,5 +25,10 @@ export default Factory.extend({
       ? null
       : new Date()
   },
-  onCalendar: false
+  onCalendar() {
+    return Math.random() >= .5
+  },
+  endDate () {
+    return this.onCalendar && this.startDate ? new Date(this.startDate.getTime() + 30*60000) : null
+  }
 });

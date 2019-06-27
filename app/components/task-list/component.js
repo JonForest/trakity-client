@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import move from 'ember-animated/motions/move';
 import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
 import { inject as service } from '@ember/service';
+import { wait } from 'ember-animated';
 
 export default class TaskList extends Component {
   @service store
@@ -65,7 +66,7 @@ export default class TaskList extends Component {
 
 
   //eslint-disable-next-line require-yield
-  * transition({ insertedSprites, removedSprites, keptSprites, sentSprites, receivedSprites }) {
+  * transition({ duration, insertedSprites, removedSprites, keptSprites, sentSprites, receivedSprites }) {
     /**
      * The transition function for handling adding, removing, completing and uncompleting tasks
      * Completed/uncompleted - animate between the lists
@@ -80,12 +81,14 @@ export default class TaskList extends Component {
 
     for (let sprite of removedSprites) {
       //todo: want to yield this, but need to control the animations in the other list somehow
-      fadeOut(sprite)
+      fadeOut(sprite, { duration: duration / 4})
     }
 
-    keptSprites.forEach(sprite => {
-      move(sprite);
-    });
+    for (let sprite of keptSprites) {
+      move(sprite, { duration: duration * (3/4)});
+      // todo: Want to yield this also, but need to control animations in the other list
+      // yield wait(75);
+    }
 
     for (let sprite of sentSprites) {
       move(sprite);
