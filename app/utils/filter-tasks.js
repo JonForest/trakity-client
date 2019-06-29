@@ -80,7 +80,7 @@ const dateFilters = [
     startDate: () => {
       return getStartOfDay(new Date())
     },
-    finishDate: (startDate) => {
+    finishDate: () => {
       // no-op
     }
   }

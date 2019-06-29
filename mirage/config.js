@@ -24,12 +24,9 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.4.x/shorthands/
   */
 
-  this.get('/tasks', (schema, request) => {
+  this.get('/tasks', (schema) => {
     return schema.tasks.all()
   })
 
-  this.patch('/tasks/:id');
-
-  this.post('/tasks');
 }
 
