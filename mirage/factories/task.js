@@ -21,12 +21,12 @@ export default Factory.extend({
       : null
   },
   completedAt() {
-    return Math.random() <= 0.25
+    return Math.random() <= 0.75
       ? null
       : new Date()
   },
   onCalendar() {
-    return Math.random() >= .5
+    return true /Math.random() >= .5
   },
   endDate () {
     return this.onCalendar && this.startDate ? new Date(this.startDate.getTime() + 30*60000) : null
