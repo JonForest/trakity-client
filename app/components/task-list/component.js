@@ -27,7 +27,7 @@ export default class TaskList extends Component {
     task.set('completedAt', isComplete ? new Date() :  null)
 
     try {
-      await this.saveTask(task)
+      await this.args.saveTask(task)
     } catch (e) {
       console.error(e)
       // Save failed. Reset the value and reverse the animation

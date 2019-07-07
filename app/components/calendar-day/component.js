@@ -28,6 +28,10 @@ export default class CalendarDayComponent extends Component {
     successCb(this.calendarEvents)
   }
 
+  /**
+   * Callback function of the drag and resize events from the calendar
+   * @param event - the post-action event object model
+   */
   _saveTask({ event } ) {
     const { id, start, end } = event
     const task = this.store.peekRecord('task', id)
@@ -45,7 +49,8 @@ export default class CalendarDayComponent extends Component {
       editable: true,
       startEditable: true,
       durationEditable: true,
-      eventDrop: this._saveTask.bind(this)
+      eventDrop: this._saveTask.bind(this),
+      eventResize: this._saveTask.bind(this)
     })
 
     this.calendar.render();
