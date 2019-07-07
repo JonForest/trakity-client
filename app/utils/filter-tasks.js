@@ -81,8 +81,8 @@ const dateFilters = [
       // Therefore `1 + 7 - checkDate.getDay()) % 7` moves the date forward enough days to get to the next monday
       // Note, `setDate(35)` (for example) is clever enough to move into the next month and not barf
       let checkDate = new Date()
-      return checkDate.getDay() === 1
-        ? getStartOfDay(checkDate.setDate(checkDate.getDate() + 7))
+      return checkDate.getDay() === 0
+        ? getStartOfDay(checkDate.setDate(checkDate.getDate() + 1))
         : getStartOfDay(checkDate.setDate(checkDate.getDate() + (1 + 7 - checkDate.getDay())))
     },
     finishDate: (startDate) => {

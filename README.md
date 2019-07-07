@@ -1,12 +1,11 @@
 #TODO
-* Import calendar control (https://fullcalendar.io/docs/getting-started)
+* Move calendar items by dragging
 * Investigate how to hook up an external calendar - within Calendar control
 * Investigate how to integrate with Google Calendar 
    - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
    - https://developers.google.com/calendar/caldav/v2/guide
    - https://console.developers.google.com/apis/api/caldav.googleapis.com/overview?project=trakity&authuser=1&supportedpurview=project
    - https://stackoverflow.com/questions/22911963/using-the-caldav-api-for-google-calender
-* Investigate how to add calendar items from the UI
 * Investigate how to add/update items back into remote calendar
 * Add in Ember Embroider
 * Deleting a new task should clear values and return it to a 'minimal' state
@@ -29,6 +28,8 @@ x. Controls for each task are not keyboard accessible.
 * Target date should be limited to today and after
 * Editing a task should create a temp version, or changeset, so that updates don't immediately impact (e.g. changing date moves the task to another day before save) (25/06/19)
 * Changing date should move the task into another list (25/06/19)
+* Import calendar control (https://fullcalendar.io/docs/getting-started)
+* Investigate how to add calendar items from the UI
 
 
 BEGIN:VCALENDAR
