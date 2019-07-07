@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { Calendar } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { tracked } from '@glimmer/tracking';
 
 
 function convertModelToEvent(taskModel) {
@@ -17,11 +16,12 @@ export default class CalendarDayComponent extends Component {
   //    - especially as the default is to _not_ display on the calendar)
   // - What happens if we click on a task in the calendar and want to edit it, how does the UI behave?
 
-  @tracked calendarEvents
+  get calendarEvents() {
+    return this.args.tasks.filter(task => task.onCalendar).map(convertModelToEvent)
+  }
 
-  constructor() {
-    super(...arguments)
-    this.calendarEvents = this.args.tasks.filter(task => task.onCalendar).map(convertModelToEvent)
+  _renderEvents(info, successCb) {
+    successCb(this.calendarEvents)
   }
 
   @action
@@ -29,9 +29,14 @@ export default class CalendarDayComponent extends Component {
     this.calendar = new Calendar(element, {
       plugins: [ timeGridPlugin ],
       defaultView: 'timeGridDay',
-      events: this.calendarEvents
+      events: this._renderEvents.bind(this)
     })
 
     this.calendar.render();
+  }
+
+  @action
+  updateEvents() {
+    this.calendar.refetchEvents()
   }
 }

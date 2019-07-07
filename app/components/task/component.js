@@ -114,7 +114,8 @@ export default class Task extends Component {
 
   @action
   selectDate([date]) {
-    this.editTask.startDate = date
+    this.editTask.set('startDate', date)
+    // this.editTask.startDate = date
   }
 
   @action

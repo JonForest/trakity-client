@@ -17,8 +17,7 @@
           <textarea
             class="appearance-none rounded-sm w-full h-24 bg-blue-lightest text-blue-darkest p-2 mb-4"
             {{ref this "detailTextArea"}}
-            {{on "change" (fn this.updateTask "detail")}}>{{this.editTask.detail}}
-          </textarea>
+            {{on "change" (fn this.updateTask "detail")}}>{{this.editTask.detail}}</textarea>
 
           <div class="flex justify-between">
             <EmberFlatpickr class="rounded-sm bg-blue-lightest text-blue-darkest pl-2 mb-4 mr-8 w-3/4 h-16 rounded border-2 text-lg"

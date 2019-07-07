@@ -1,4 +1,4 @@
-<TaskList @title="Today" @tasks={{this.today}} @primary={{true}} />
-<TaskList @title="Tomorrow" @tasks={{this.tomorrow}} />
-<TaskList @title="Rest of the week" @tasks={{this.restOfWeek}} />
-<TaskList @title="Next week" @tasks={{this.nextWeek}} />
+<TaskList @title="Today" @tasks={{this.today}} @primary={{true}} @saveTask={{@saveTask}} @removeTask={{@removeTask}} />
+<TaskList @title="Tomorrow" @tasks={{this.tomorrow}} @saveTask={{@saveTask}} @removeTask={{@removeTask}} />
+<TaskList @title="Rest of the week" @tasks={{this.restOfWeek}} @saveTask={{@saveTask}} @removeTask={{@removeTask}} />
+<TaskList @title="Next week" @tasks={{this.nextWeek}} @saveTask={{@saveTask}} @removeTask={{@removeTask}} />

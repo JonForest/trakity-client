@@ -8,12 +8,6 @@ import { wait } from 'ember-animated';
 export default class TaskList extends Component {
   @service store
 
-  constructor() {
-    super(...arguments)
-    // Only create a task in the primary list
-    if (this.args.primary) this.args.tasks.push(this.store.createRecord('task'))
-  }
-
   get completedTasks() {
     return this.args.tasks.filter(task => task.completedAt != null)
   }
@@ -24,12 +18,6 @@ export default class TaskList extends Component {
 
   get uncompletedTaskCount() {
     return this.uncompletedTasks.filter(task => !!task.id).length
-  }
-
-  _addNewTask() {
-    if (this.uncompletedTasks.filter(task => !task.id).length === 0) {
-      this.args.tasks.push(this.store.createRecord('task'))
-    }
   }
 
   @action
@@ -46,24 +34,6 @@ export default class TaskList extends Component {
       task.set('completedAt', rollbackSetting)
     }
   }
-
-  /**
-   * @param task {Object} - Ember Data Model _or_ an Ember ChangeSet. Both have the same `save` API
-   * @returns {Promise<void>}
-   */
-  @action
-  async saveTask(task) {
-
-    await task.save();
-    this._addNewTask()
-  }
-
-  @action removeTask(task) {
-    let taskIndex = this.args.tasks.indexOf(task);
-    this.args.tasks.splice(taskIndex, 1);
-    this._addNewTask()
-  }
-
 
   //eslint-disable-next-line require-yield
   * transition({ duration, insertedSprites, removedSprites, keptSprites, sentSprites, receivedSprites }) {
