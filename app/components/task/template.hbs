@@ -20,7 +20,7 @@
             {{on "change" (fn this.updateTask "detail")}}>{{this.editTask.detail}}</textarea>
 
           <div class="flex justify-between">
-            <EmberFlatpickr class="rounded-sm bg-blue-lightest text-blue-darkest pl-2 mb-4 mr-8 w-3/4 h-16 rounded border-2 text-lg"
+            <EmberFlatpickr class="rounded-sm bg-blue-lightest text-blue-darkest pl-2 mb-4 mr-8 w-3/4 h-8 rounded border-2 text-lg"
               @altInput={{true}}
               @altFormat="J F, Y h i K"
               @enableTime={{true}}
@@ -29,12 +29,12 @@
               @placeholder={{"Pick date"}}
               @minDate={{this.minDate}}
             />
-            {{!--
+          </div>
+          <div class="flex justify-between">
             <ShowOnCalendar
-              @checked={{@task.onCalendar}}
-              @onClick={{fn (mut @task.onCalendar)}}
-            />
-            --}}
+                @checked={{this.editTask.onCalendar}}
+                @onChange={{fn (mut this.editTask.onCalendar)}}
+              />
           </div>
         {{/if}}
 

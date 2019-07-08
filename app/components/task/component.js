@@ -31,6 +31,7 @@ export default class Task extends Component {
     }
   }
 
+  // eslint-disable-next-line require-yield
   *resize ({ insertedSprites, removedSprites, keptSprites }) {
     insertedSprites.forEach(sprite => {
       resize(sprite, { fromHeight: 0 });
@@ -116,10 +117,5 @@ export default class Task extends Component {
   selectDate([date]) {
     this.editTask.set('startDate', date)
     // this.editTask.startDate = date
-  }
-
-  @action
-  selectCalendar() {
-    debugger
   }
 }

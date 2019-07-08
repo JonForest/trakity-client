@@ -1,24 +1,21 @@
 {{#if @tasks.length}}
   <DashboardPanel>
+    <TaskList::Title @count={{this.uncompletedTaskCount}}>
+      {{@title}}
+    </TaskList::Title>
 
-    <TaskList::Title
-      @count={{uncompletedTaskCount}} {{!-- todo: this count shouldn't include unsaved tasks --}}
-    >{{@title}}</TaskList::Title>
     <AnimatedContainer>
       <AnimatedContainer>
-        <ul class="list-reset"> <!-- todo: remove when tailwind updates -->
+        <ul class="list-reset">
           {{#animated-each this.uncompletedTasks use=this.transition duration=750 as |task|}}
-              <Task @task={{task}} @completeTask={{fn this.completeTask task}} @saveTask={{fn @saveTask}} @removeTask={{fn @removeTask task}}></Task>
+            <Task @task={{task}} @completeTask={{fn this.completeTask task}} @saveTask={{fn @saveTask}} @removeTask={{fn @removeTask task}}></Task>
           {{/animated-each}}
         </ul>
       </AnimatedContainer>
-      <!--<button class="bg-orange-button text-blue-darkest shadow-lg rounded-lg float-right py-2 w-48 font-bold">-->
-        <!--+ Add Task-->
-      <!--</button>-->
       <div class="clearfix"></div>
 
       <AnimatedContainer>
-        <ul class="list-reset clearfix"> <!-- todo: remove when tailwind updates -->
+        <ul class="list-reset clearfix">
           {{#animated-each this.completedTasks use=this.transition duration=750 as |task|}}
             <Task @task={{task}} @completeTask={{fn this.completeTask task}}></Task>
           {{/animated-each}}

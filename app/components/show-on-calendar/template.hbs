@@ -1,9 +1,6 @@
-<button class="w-16 h-16 rounded-lg border-2 flex items-center text-blue-darkest
-  {{if @checked "bg-green-lightest border-green-dark " "bg-blue-lightest border-blue-dark"}}
-"
-  {{on "click" (fn @onClick (not @checked))}}
->
-  <div class="text-center">
-    {{if @checked "Remove from calendar" "Add to calendar"}}
-  </div>
-</button>
+<label class="md:w-2/3 block text-grey font-bold">
+  <input class="mr-2 leading-tight" type="checkbox" checked={{@checked}} {{on "change" (fn @onChange (not @checked))}}>
+  <span class="text-sm">
+    Show task on the calendar
+  </span>
+</label>

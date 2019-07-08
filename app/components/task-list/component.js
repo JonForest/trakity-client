@@ -1,9 +1,9 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import move from 'ember-animated/motions/move';
-import { fadeIn, fadeOut } from 'ember-animated/motions/opacity';
+import { fadeOut } from 'ember-animated/motions/opacity';
 import { inject as service } from '@ember/service';
-import { wait } from 'ember-animated';
+// import { wait } from 'ember-animated';
 
 export default class TaskList extends Component {
   @service store
@@ -36,7 +36,7 @@ export default class TaskList extends Component {
   }
 
   //eslint-disable-next-line require-yield
-  * transition({ duration, insertedSprites, removedSprites, keptSprites, sentSprites, receivedSprites }) {
+  * transition({ duration, removedSprites, keptSprites, sentSprites/*, insertedSprites, receivedSprites */}) {
     /**
      * The transition function for handling adding, removing, completing and uncompleting tasks
      * Completed/uncompleted - animate between the lists

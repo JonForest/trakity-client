@@ -1,5 +1,7 @@
 #TODO
-* Move calendar items by dragging
+* New task to default to the nearest half-hour
+  * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map?
+* Change the snap duration for a task to 10 mins
 * Investigate how to hook up an external calendar - within Calendar control
 * Investigate how to integrate with Google Calendar 
    - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
@@ -13,8 +15,10 @@
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
+* Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
 * Changing the date on a task should have it animate to it's new home
 * Do we want Tags in this version?  
+* Remove `class="list-reset"` from <ul> when tailwind updates 
 x. Consider refactoring out 'minimalEdit'
 x. Controls for each task are not keyboard accessible. 
 
@@ -30,6 +34,7 @@ x. Controls for each task are not keyboard accessible.
 * Changing date should move the task into another list (25/06/19)
 * Import calendar control (https://fullcalendar.io/docs/getting-started)
 * Investigate how to add calendar items from the UI
+* Move calendar items by dragging
 
 
 BEGIN:VCALENDAR
