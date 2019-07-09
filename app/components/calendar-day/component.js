@@ -49,6 +49,7 @@ export default class CalendarDayComponent extends Component {
       editable: true,
       startEditable: true,
       durationEditable: true,
+      snapDuration: { minutes: 10 },
       eventDrop: this._saveTask.bind(this),
       eventResize: this._saveTask.bind(this)
     })

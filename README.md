@@ -1,7 +1,6 @@
 #TODO
 * New task to default to the nearest half-hour
   * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map?
-* Change the snap duration for a task to 10 mins
 * Investigate how to hook up an external calendar - within Calendar control
 * Investigate how to integrate with Google Calendar 
    - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
@@ -35,6 +34,7 @@ x. Controls for each task are not keyboard accessible.
 * Import calendar control (https://fullcalendar.io/docs/getting-started)
 * Investigate how to add calendar items from the UI
 * Move calendar items by dragging
+* Change the snap duration for a task to 10 mins
 
 
 BEGIN:VCALENDAR
