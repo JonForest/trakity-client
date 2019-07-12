@@ -1,4 +1,12 @@
 <DashboardPanel>
   <div {{did-insert this.addCalendar}} {{did-update this.updateEvents @tasks}}>
   </div>
+
+  {{#if (and this.initialiseGapi (not this.isGoogleAuthorised))}}
+    <button
+      class="mt-8 bg-orange-button text-blue-darkest shadow-lg rounded-lg py-2 w-48 font-bold"
+      {{on "click" this.googleLogin}}>
+      Log in to Google
+    </button>
+  {{/if}}
 </DashboardPanel>

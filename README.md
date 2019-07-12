@@ -1,6 +1,10 @@
+# In progress
+Looking at the CalDav implementation.
+Have a Client API ID: 736957908143-q5c3ci3gmrr6j47cq0a0us4l4of5m740.apps.googleusercontent.com 
+Next step is to wire up the OAuth 2 authentication - https://developers.google.com/calendar/auth
+Thinking that I should have a 'connect Google calendar' button on there, rather than do it by default - and store any user settings in local storage for now
+
 #TODO
-* New task to default to the nearest half-hour
-  * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map?
 * Investigate how to hook up an external calendar - within Calendar control
 * Investigate how to integrate with Google Calendar 
    - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
@@ -14,7 +18,8 @@
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
-* Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
+** New task to default to the nearest half-hour
+  * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map? Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
 * Changing the date on a task should have it animate to it's new home
 * Do we want Tags in this version?  
 * Remove `class="list-reset"` from <ul> when tailwind updates 

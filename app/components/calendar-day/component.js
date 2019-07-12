@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 import { Calendar } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -14,18 +15,44 @@ function convertModelToEvent(taskModel) {
 
 export default class CalendarDayComponent extends Component {
   @service store
+  @service gapiInterface
+
+  @tracked initialiseGapi = false
+  @tracked isGoogleAuthorised = false
   //As the next action, really need to think through this workflow
   // - How can we drag tasks onto the calendar?
   // - Do we really want to render _all_ tasks in the calendar (might be okay tbh
   //    - especially as the default is to _not_ display on the calendar)
   // - What happens if we click on a task in the calendar and want to edit it, how does the UI behave?
 
+
+  constructor() {
+    super(...arguments)
+    this.gapiInterface.initGapi(this.initialiseGapiComplete.bind(this), this.showErrors.bind(this))
+
+  }
+
+  initialiseGapiComplete(isAuthorised) {
+    this.initialiseGapi = true;
+    this.isGoogleAuthorised = isAuthorised
+    if (isAuthorised) {
+      console.log('Fetch events')
+    }
+  }
+
+  showErrors(message) {
+    alert(message)
+  }
+
   get calendarEvents() {
     return this.args.tasks.filter(task => task.onCalendar).map(convertModelToEvent)
   }
 
   _renderEvents(info, successCb) {
-    successCb(this.calendarEvents)
+    if (!this.hasGoogleEvents) successCb(this.calendarEvents)
+    else {
+      console.log('Merging events from google calendar and tasks')
+    }
   }
 
   /**
@@ -60,5 +87,10 @@ export default class CalendarDayComponent extends Component {
   @action
   updateEvents() {
     this.calendar.refetchEvents()
+  }
+
+  @action
+  googleLogin() {
+    this.gapiInterface.login(() => alert('success'), () => alert('failure'))
   }
 }
