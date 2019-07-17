@@ -23,6 +23,7 @@ Thinking that I should have a 'connect Google calendar' button on there, rather 
 * Changing the date on a task should have it animate to it's new home
 * Do we want Tags in this version?  
 * Remove `class="list-reset"` from <ul> when tailwind updates 
+* Should the app write the tasks to google calendar? (thinking yes, but probably need to default to private (if poss with caldav) and also need to not be double counted/shown  )
 x. Consider refactoring out 'minimalEdit'
 x. Controls for each task are not keyboard accessible. 
 
@@ -59,6 +60,14 @@ END:VCALENDAR
 //    todo: remove the action helper and replace with the on helper
 //    todo: look at svg-jar to see if it can replace my icon component
 
+
+##CalDav Notes
+```
+GET https://apidata.googleusercontent.com/caldav/v2/jonforest@gmail.com/events
+Accept: */*
+Cache-Control: no-cache
+Authorization: Bearer this._GoogleAuth.currentUser.get().getAuthReponse(true).access_token
+```
 
 
 # trakity-client

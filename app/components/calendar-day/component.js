@@ -13,12 +13,19 @@ function convertModelToEvent(taskModel) {
   return { id, title, start, end, classNames }
 }
 
+function convertGoogleEventToEvent(gEvent) {
+  const { id, summary: title, start: {dateTime: start}, end: {dateTime: end}} = gEvent
+  const classNames = 'bg-blue'
+  return { id, title, start, end, classNames }
+}
+
 export default class CalendarDayComponent extends Component {
   @service store
   @service gapiInterface
 
   @tracked initialiseGapi = false
   @tracked isGoogleAuthorised = false
+  _googleCalendarEvents = []
   //As the next action, really need to think through this workflow
   // - How can we drag tasks onto the calendar?
   // - Do we really want to render _all_ tasks in the calendar (might be okay tbh
@@ -32,11 +39,13 @@ export default class CalendarDayComponent extends Component {
 
   }
 
-  initialiseGapiComplete(isAuthorised) {
+  async initialiseGapiComplete(isAuthorised) {
     this.initialiseGapi = true;
     this.isGoogleAuthorised = isAuthorised
     if (isAuthorised) {
       console.log('Fetch events')
+      this._googleCalendarEvents = await this.gapiInterface.fetchEvents()
+      this.calendar.refetchEvents()
     }
   }
 
@@ -48,11 +57,20 @@ export default class CalendarDayComponent extends Component {
     return this.args.tasks.filter(task => task.onCalendar).map(convertModelToEvent)
   }
 
+  get googleCalendarEvents() {
+    const events =  this._googleCalendarEvents.reduce((acc, event) => {
+      // Remove any all day events
+      // if (event.start.date.)
+      // todo: one of these events is failing to be converted, so need to probably identify and remove
+      // (think it might the third one, but check tmorrow)
+      acc.push(convertGoogleEventToEvent(event))
+      return acc
+    }, [])
+    return events
+  }
+
   _renderEvents(info, successCb) {
-    if (!this.hasGoogleEvents) successCb(this.calendarEvents)
-    else {
-      console.log('Merging events from google calendar and tasks')
-    }
+    successCb(this.calendarEvents.concat(this.googleCalendarEvents))
   }
 
   /**

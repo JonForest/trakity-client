@@ -11,6 +11,13 @@ function getStartOfDay (date = new Date()) {
   return new Date(year, month, day, 0, 0, 0)
 }
 
+function getEndOfDay(date = new Date()) {
+  const tempDay = getStartOfDay(date)
+  tempDay.setDate(tempDay.getDate() + 1)
+  tempDay.setMinutes(tempDay.getMinutes() - 1)
+  return tempDay
+}
+
 /**
  * Returns an ISO format date string, but local to your timezone (i.e. does not convert back to UTC)
  * @param {Date} date
@@ -35,4 +42,4 @@ function getLocalDateFromString (localISODateString) {
   return new Date(dateParts[0], dateParts[1] - 1, dateParts[2])
 }
 
-export { getStartOfDay, getISOFormatLocalDateString, getLocalDateFromString }
+export { getStartOfDay, getEndOfDay, getISOFormatLocalDateString, getLocalDateFromString }

@@ -1,6 +1,7 @@
 /* global gapi */
 /* https://developers.google.com/identity/protocols/OAuth2UserAgent */
 import Service from '@ember/service';
+import { getEndOfDay, getStartOfDay } from '../utils/date-funcs'
 
 export default class GapiInterfaceService extends Service {
   ERROR_STATES = {
@@ -31,7 +32,7 @@ export default class GapiInterfaceService extends Service {
       'apiKey': 'AIzaSyCaPHpTlncnW2InRJDRRz8OrdpyFIhr3-A',
       'clientId': '736957908143-q5c3ci3gmrr6j47cq0a0us4l4of5m740.apps.googleusercontent.com',
       'scope': this._SCOPE,
-      'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']
+      'discoveryDocs': ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
     }).then(() => {
       this._GoogleAuth = gapi.auth2.getAuthInstance();
 
@@ -40,6 +41,7 @@ export default class GapiInterfaceService extends Service {
 
       completeCb(this._isUserLoggedIn())
     }).catch(() => {
+      debugger
       failureCb(this.ERROR_STATES.CLIENT_INIT_FAILED)
     });
   }
@@ -60,5 +62,28 @@ export default class GapiInterfaceService extends Service {
   updateSigninStatus(notifyChangeCb, signedIn) {
     console.log('signed in status changed')
     notifyChangeCb(signedIn)
+  }
+
+  async fetchEvents() {
+    try {
+      // https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.list
+      // or the less good https://developers.google.com/calendar/v3/reference/
+      const { result: { items } } = await gapi.client.calendar.events.list({
+        'calendarId': 'primary', // can use user's email
+        'timeMin': getStartOfDay().toISOString(),
+        'showDeleted': false,
+        'singleEvents': true,
+        // 'maxResults': 10,
+        'timeMax': getEndOfDay().toISOString(),
+        'orderBy': 'startTime'
+      })
+      console.log(items)
+      return items
+    } catch (e) {
+      debugger
+      // For now, just propagate up the error
+      throw e
+    }
+
   }
 }
