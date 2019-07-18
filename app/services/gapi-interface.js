@@ -3,6 +3,7 @@
 import Service from '@ember/service';
 import { getEndOfDay, getStartOfDay } from '../utils/date-funcs'
 
+
 export default class GapiInterfaceService extends Service {
   ERROR_STATES = {
     "LOAD_FAILED": "Failed to load client library",
@@ -64,17 +65,18 @@ export default class GapiInterfaceService extends Service {
     notifyChangeCb(signedIn)
   }
 
-  async fetchEvents() {
+  async fetchEvents(dayDate = new Date()) {
+    debugger
     try {
       // https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.list
       // or the less good https://developers.google.com/calendar/v3/reference/
       const { result: { items } } = await gapi.client.calendar.events.list({
         'calendarId': 'primary', // can use user's email
-        'timeMin': getStartOfDay().toISOString(),
+        'timeMin': getStartOfDay(dayDate).toISOString(),
         'showDeleted': false,
         'singleEvents': true,
         // 'maxResults': 10,
-        'timeMax': getEndOfDay().toISOString(),
+        'timeMax': getEndOfDay(dayDate).toISOString(),
         'orderBy': 'startTime'
       })
       console.log(items)

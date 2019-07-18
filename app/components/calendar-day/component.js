@@ -15,7 +15,7 @@ function convertModelToEvent(taskModel) {
 
 function convertGoogleEventToEvent(gEvent) {
   const { id, summary: title, start: {dateTime: start}, end: {dateTime: end}} = gEvent
-  const classNames = 'bg-blue'
+  const classNames = 'bg-red-darker border-red-darker'
   return { id, title, start, end, classNames }
 }
 
@@ -43,7 +43,6 @@ export default class CalendarDayComponent extends Component {
     this.initialiseGapi = true;
     this.isGoogleAuthorised = isAuthorised
     if (isAuthorised) {
-      console.log('Fetch events')
       this._googleCalendarEvents = await this.gapiInterface.fetchEvents()
       this.calendar.refetchEvents()
     }
@@ -59,10 +58,7 @@ export default class CalendarDayComponent extends Component {
 
   get googleCalendarEvents() {
     const events =  this._googleCalendarEvents.reduce((acc, event) => {
-      // Remove any all day events
-      // if (event.start.date.)
-      // todo: one of these events is failing to be converted, so need to probably identify and remove
-      // (think it might the third one, but check tmorrow)
+      // Note: All day events may cause a problem?
       acc.push(convertGoogleEventToEvent(event))
       return acc
     }, [])
@@ -96,7 +92,14 @@ export default class CalendarDayComponent extends Component {
       durationEditable: true,
       snapDuration: { minutes: 10 },
       eventDrop: this._saveTask.bind(this),
-      eventResize: this._saveTask.bind(this)
+      eventResize: this._saveTask.bind(this),
+      datesRender: async ({ view }) => {
+        // On first render, this will run before the google account is initialised and authorised
+        if (this.initialiseGapi && this.isGoogleAuthorised) {
+          this._googleCalendarEvents = await this.gapiInterface.fetchEvents(view.activeStart)
+          this.calendar.refetchEvents()
+        }
+      }
     })
 
     this.calendar.render();

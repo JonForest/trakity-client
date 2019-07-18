@@ -5,13 +5,7 @@ Next step is to wire up the OAuth 2 authentication - https://developers.google.c
 Thinking that I should have a 'connect Google calendar' button on there, rather than do it by default - and store any user settings in local storage for now
 
 #TODO
-* Investigate how to hook up an external calendar - within Calendar control
-* Investigate how to integrate with Google Calendar 
-   - https://devguide.calconnect.org/CalDAV/building-a-caldav-client/
-   - https://developers.google.com/calendar/caldav/v2/guide
-   - https://console.developers.google.com/apis/api/caldav.googleapis.com/overview?project=trakity&authuser=1&supportedpurview=project
-   - https://stackoverflow.com/questions/22911963/using-the-caldav-api-for-google-calender
-* Investigate how to add/update items back into remote calendar
+* Change the time range of the calendar to be more practical
 * Add in Ember Embroider
 * Deleting a new task should clear values and return it to a 'minimal' state
 *. Keyboard controls wired up
@@ -24,6 +18,7 @@ Thinking that I should have a 'connect Google calendar' button on there, rather 
 * Do we want Tags in this version?  
 * Remove `class="list-reset"` from <ul> when tailwind updates 
 * Should the app write the tasks to google calendar? (thinking yes, but probably need to default to private (if poss with caldav) and also need to not be double counted/shown  )
+* Think about if we want to write items back to the Google Calendar (thinking probably not, but maybe?)
 x. Consider refactoring out 'minimalEdit'
 x. Controls for each task are not keyboard accessible. 
 
@@ -41,7 +36,8 @@ x. Controls for each task are not keyboard accessible.
 * Investigate how to add calendar items from the UI
 * Move calendar items by dragging
 * Change the snap duration for a task to 10 mins
-
+* Investigate how to hook up an external calendar - within Calendar control
+* Hook up calendar such that when you change days, it fetches new calendar events from google
 
 BEGIN:VCALENDAR
 VERSION:2.0
