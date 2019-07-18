@@ -5,15 +5,16 @@ Next step is to wire up the OAuth 2 authentication - https://developers.google.c
 Thinking that I should have a 'connect Google calendar' button on there, rather than do it by default - and store any user settings in local storage for now
 
 #TODO
-* Change the time range of the calendar to be more practical
+** New task to default to the nearest half-hour
+  * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map? Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
+* STOP - at this point, consider wiring up a back-end
+
 * Add in Ember Embroider
 * Deleting a new task should clear values and return it to a 'minimal' state
 *. Keyboard controls wired up
   - n - focus in the minimal edit
   - s - save an edited task
   - c - cancel an edit
-** New task to default to the nearest half-hour
-  * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map? Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
 * Changing the date on a task should have it animate to it's new home
 * Do we want Tags in this version?  
 * Remove `class="list-reset"` from <ul> when tailwind updates 
@@ -38,6 +39,7 @@ x. Controls for each task are not keyboard accessible.
 * Change the snap duration for a task to 10 mins
 * Investigate how to hook up an external calendar - within Calendar control
 * Hook up calendar such that when you change days, it fetches new calendar events from google
+* Change the time range of the calendar to be more practical
 
 BEGIN:VCALENDAR
 VERSION:2.0

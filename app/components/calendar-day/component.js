@@ -86,6 +86,7 @@ export default class CalendarDayComponent extends Component {
     this.calendar = new Calendar(element, {
       plugins: [ timeGridPlugin, interactionPlugin ],
       defaultView: 'timeGridDay',
+      height: () => window.innerHeight - 100,
       events: this._renderEvents.bind(this),
       editable: true,
       startEditable: true,
