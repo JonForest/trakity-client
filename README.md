@@ -5,6 +5,11 @@ Next step is to wire up the OAuth 2 authentication - https://developers.google.c
 Thinking that I should have a 'connect Google calendar' button on there, rather than do it by default - and store any user settings in local storage for now
 
 #TODO
+* Wire up the application to talk to the back end using a known user
+ ** For now, remove Mirage
+* Add the ability to optionally run with / without mirage
+ ** Need to make mirage understand how to deal with the permissions/auth etc
+ 
 ** New task to default to the nearest half-hour
   * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map? Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
 * STOP - at this point, consider wiring up a back-end

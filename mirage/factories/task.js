@@ -1,4 +1,5 @@
-import { Factory, faker } from 'ember-cli-mirage';
+import { Factory } from 'ember-cli-mirage'
+import faker from 'faker'
 
 export default Factory.extend({
   description() {
@@ -26,7 +27,7 @@ export default Factory.extend({
       : new Date()
   },
   onCalendar() {
-    return true /Math.random() >= .5
+    return true //Math.random() >= .5
   },
   endDate () {
     return this.onCalendar && this.startDate ? new Date(this.startDate.getTime() + 30*60000) : null

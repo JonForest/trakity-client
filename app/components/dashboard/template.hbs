@@ -1,5 +1,4 @@
 <TasksManager @tasks={{@tasks}} as |tm|>
-  {{log tm}}
   <div class="flex flex-wrap flex-col-reverse lg:flex-row">
     <div class="w-full lg:w-1/2">
       <DashboardTaskLists @tasks={{tm.tasks}} @saveTask={{tm.saveTask}} @removeTask={{tm.removeTask}} />
