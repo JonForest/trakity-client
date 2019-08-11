@@ -1,3 +1,5 @@
+import config from '../config/environment'
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -24,14 +26,28 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.4.x/shorthands/
   */
 
-  this.get('/tasks', (schema) => {
+  this.urlPrefix = config.apiHost
+
+  // todo: use the ENV vars here, or something
+  this.get('/tasks', (schema, request) => {
+    checkHeaders(request)
     return schema.tasks.all()
   })
+
 
   this.patch('/tasks/:id');
 
   this.post('/tasks');
 
   this.delete('/tasks/:id')
+
+  this.passthrough();
+}
+
+
+function checkHeaders(request) {
+  if (!(request.requestHeaders && request.requestHeaders.authorization)) {
+    throw new Error('Missing Authorization header')
+  }
 }
 

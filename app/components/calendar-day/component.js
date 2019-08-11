@@ -113,6 +113,6 @@ export default class CalendarDayComponent extends Component {
 
   @action
   googleLogin() {
-    this.gapiInterface.login(() => alert('success'), () => alert('failure'))
+    this.gapiInterface.login(() => {}, (err) => {throw err})
   }
 }

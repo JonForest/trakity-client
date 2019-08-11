@@ -22,7 +22,8 @@ export default class GapiInterfaceService extends Service {
     gapi.load('client', {
       callback: this.initGapiClient.bind(this, completeCb, failureCb),
       onError: (err) => {
-        debugger
+        // eslint-disable-next-line no-console
+        console.error(err)
         failureCb(this.ERROR_STATES.LOAD_FAILED)
       }
     })
@@ -42,31 +43,31 @@ export default class GapiInterfaceService extends Service {
 
       completeCb(this._isUserLoggedIn())
     }).catch(() => {
-      debugger
       failureCb(this.ERROR_STATES.CLIENT_INIT_FAILED)
     });
   }
 
   login(completeCb, failiureCb) {
     if (!this._GoogleAuth) {
-      alert('How did you get here with no google Auth')
+      failiureCb(new Error('No Google Auth process initiated before calling login'))
     }
     if (this._GoogleAuth.isSignedIn.get()) {
+      // eslint-disable-next-line no-console
       console.log('Signing out')
       this._GoogleAuth.signOut()
     } else {
+      // eslint-disable-next-line no-console
       console.log('Signing in')
       this._GoogleAuth.signIn()
     }
+    completeCb()
   }
 
   updateSigninStatus(notifyChangeCb, signedIn) {
-    console.log('signed in status changed')
     notifyChangeCb(signedIn)
   }
 
   async fetchEvents(dayDate = new Date()) {
-    debugger
     try {
       // https://developers.google.com/apis-explorer/#p/calendar/v3/calendar.events.list
       // or the less good https://developers.google.com/calendar/v3/reference/
@@ -79,10 +80,8 @@ export default class GapiInterfaceService extends Service {
         'timeMax': getEndOfDay(dayDate).toISOString(),
         'orderBy': 'startTime'
       })
-      console.log(items)
       return items
     } catch (e) {
-      debugger
       // For now, just propagate up the error
       throw e
     }

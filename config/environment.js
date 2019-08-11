@@ -2,6 +2,10 @@
 
 module.exports = function(environment) {
   let ENV = {
+    'ember-cli-mirage': {
+      enabled: true
+    },
+    apiHost: 'http://localhost:8000',
     modulePrefix: 'trakity-client',
     environment,
     rootURL: '/',

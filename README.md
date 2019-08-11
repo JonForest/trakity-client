@@ -5,8 +5,12 @@ Next step is to wire up the OAuth 2 authentication - https://developers.google.c
 Thinking that I should have a 'connect Google calendar' button on there, rather than do it by default - and store any user settings in local storage for now
 
 #TODO
-* Wire up the application to talk to the back end using a known user
- ** For now, remove Mirage
+* Create login
+  ** Create a service (might be there already) that makes a request to the server to login and saves the token in memory and localstorage
+  ** On successful login, redirect to the dashboard
+  ** Need to wire up such that when the access token expires, the refresh token is attempted
+  ** Once a new access token is granted, need to retry the original request
+* Add in .env var for the build
 * Add the ability to optionally run with / without mirage
  ** Need to make mirage understand how to deal with the permissions/auth etc
  
@@ -45,6 +49,8 @@ x. Controls for each task are not keyboard accessible.
 * Investigate how to hook up an external calendar - within Calendar control
 * Hook up calendar such that when you change days, it fetches new calendar events from google
 * Change the time range of the calendar to be more practical
+* Getting CORs errors, but why did we not get them in AQ
+  ** https://github.com/adamchainz/django-cors-headers <- perhaps we used this?
 
 BEGIN:VCALENDAR
 VERSION:2.0
