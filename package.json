@@ -44,6 +44,7 @@
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
     "ember-concurrency": "^1.0.0",
+    "ember-concurrency-decorators": "^1.0.0-beta.4",
     "ember-data": "3.12.0",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^6.7.0",
@@ -60,6 +61,10 @@
     "faker": "^4.1.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0"
+  },
+  "resolutions": {
+    "@babel/core": "7.5.5",
+    "ember-cli/portfinder": "1.0.21"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

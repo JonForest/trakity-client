@@ -6,4 +6,9 @@
   <input type="password" id="password">
 
   <button type="submit">Login</button>
+  {{#if this.loginFailureMessage}}
+    <div>
+      {{this.loginFailureMessage}}
+    </div>
+  {{/if}}
 </form>

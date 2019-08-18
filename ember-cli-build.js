@@ -4,7 +4,10 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    sourcemaps: {enabled: true}
+    sourcemaps: {enabled: true},
+    'ember-fetch': {
+      preferNative: true
+    }
     // Add options here
   });
 
