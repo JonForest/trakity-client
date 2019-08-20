@@ -27,9 +27,12 @@ export default class TasksManagerComponent extends Component {
    */
   @action
   async saveTask(task) {
-
-    await task.save();
-    this._addNewTask()
+    try {
+      await task.save();
+      this._addNewTask()
+    } catch (e) {
+      task.rollbackAttributes()
+    }
     this.tasks = this.tasks
   }
 

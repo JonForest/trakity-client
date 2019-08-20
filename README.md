@@ -1,6 +1,6 @@
 #TODO
-* Re-use a token from local storage if present on machine following hard refresh
-* Add in .env var for the build
+* Animations for moving tasks seems to have broken
+* Wire up actual login form
 * Add the ability to optionally run with / without mirage
  ** Need to make mirage understand how to deal with the permissions/auth etc
  
@@ -44,6 +44,8 @@ x. Controls for each task are not keyboard accessible.
 * Create login
   ** Create a service (might be there already) that makes a request to the server to login and saves the token in memory and localstorage
   ** On successful login, redirect to the dashboard
+* Re-use a token from local storage if present on machine following hard refresh
+* Fix using old token after an access token has expired (suspect it's the computed property not updating - add some dependent fields)
 
 BEGIN:VCALENDAR
 VERSION:2.0

@@ -22,6 +22,7 @@ export default class TaskList extends Component {
 
   @action
   async completeTask(task, isComplete) {
+    // todo: why does this need a separate rollback setting?
     // Need .set as an Ember Data model
     const rollbackSetting = task.completedAt
     task.set('completedAt', isComplete ? new Date() :  null)

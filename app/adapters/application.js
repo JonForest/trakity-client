@@ -50,11 +50,11 @@ export default DS.JSONAPIAdapter.extend({
     this.set('host', config.apiHost)
   },
 
-  headers: computed('session.authToken', function() {
+  headers: computed(function() {
     return {
       'Authorization': `Bearer ${this.authenticate.getAccessToken()}`
     }
-  }),
+  }).volatile(),
 
   handleResponse(status, headers, payload, requestData) {
     if (status === 401) {
