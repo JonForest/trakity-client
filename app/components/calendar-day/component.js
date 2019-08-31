@@ -22,6 +22,7 @@ function convertGoogleEventToEvent(gEvent) {
 export default class CalendarDayComponent extends Component {
   @service store
   @service gapiInterface
+  @service logger
 
   @tracked initialiseGapi = false
   @tracked isGoogleAuthorised = false
@@ -49,7 +50,7 @@ export default class CalendarDayComponent extends Component {
   }
 
   showErrors(message) {
-    alert(message)
+    this.logger.error(message)
   }
 
   get calendarEvents() {

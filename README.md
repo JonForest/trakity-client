@@ -1,5 +1,4 @@
 #TODO
-* Animations for moving tasks seems to have broken
 * Wire up actual login form
 * Add the ability to optionally run with / without mirage
  ** Need to make mirage understand how to deal with the permissions/auth etc

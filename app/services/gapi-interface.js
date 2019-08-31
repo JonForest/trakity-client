@@ -6,6 +6,7 @@ import { getEndOfDay, getStartOfDay } from '../utils/date-funcs'
 
 export default class GapiInterfaceService extends Service {
   ERROR_STATES = {
+    "NO_GAPI": "gapi not present",
     "LOAD_FAILED": "Failed to load client library",
     "CLIENT_INIT_FAILED": "Failed to initialise the client"
   }
@@ -19,6 +20,8 @@ export default class GapiInterfaceService extends Service {
   }
 
   initGapi(completeCb, failureCb) {
+    if (typeof gapi === 'undefined' || !gapi) return failureCb(this.ERROR_STATES.NO_GAPI)
+
     gapi.load('client', {
       callback: this.initGapiClient.bind(this, completeCb, failureCb),
       onError: (err) => {
@@ -30,6 +33,8 @@ export default class GapiInterfaceService extends Service {
   }
 
   initGapiClient(completeCb, failureCb) {
+    if (typeof gapi === 'undefined' || !gapi) return failureCb(this.ERROR_STATES.NO_GAPI)
+
     gapi.client.init({
       'apiKey': 'AIzaSyCaPHpTlncnW2InRJDRRz8OrdpyFIhr3-A',
       'clientId': '736957908143-q5c3ci3gmrr6j47cq0a0us4l4of5m740.apps.googleusercontent.com',

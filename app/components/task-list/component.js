@@ -9,7 +9,10 @@ export default class TaskList extends Component {
   @service store
 
   get completedTasks() {
-    return this.args.tasks.filter(task => task.completedAt != null)
+    return this.args.tasks
+      .filter(task => task.completedAt != null)
+      // todo: check the syntax on this
+      .sort((t1, t2) => t1.completedAt - t2.completedAt)
   }
 
   get uncompletedTasks() {
