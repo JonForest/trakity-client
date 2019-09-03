@@ -1,14 +1,36 @@
-<form {{on "submit" this.login}}>
-  <label for="email">Email:</label>
-  <input type="text" id="email">
+<!-- sort out random pokey bits from border radius. Perhaps put one on top of the other -->
+<form class="max-w-full w-128 border-solid border-4 border-blue rounded-xxlg bg-blue overflow-hidden" {{on "submit" this.login}}>
+  <div class="w-full lg:h-48 h-32">
+    <div class="px-4 font-sans font-thin tracking-xwide text-white text-10xl">Trakity</div>
+    <div class="px-8 pt-2 text-white normal-text text-2xl">Task management the way you want it</div>
+  </div>
 
-  <label for="password">Password:</label>
-  <input type="password" id="password">
+  <div class="bg-blue-background px-4">
+    <div class="py-4">
+      <label class="block p-2 font-sans font-thin tracking-wide" for="email">Email:</label>
+      <input class="rounded-xxlg py-2 px-4 text-lg w-full" type="text" id="email">
+    </div>
 
-  <button type="submit">Login</button>
+    <div class="py-4">
+      <label class="block p-2 font-sans font-thin tracking-wide" for="password">Password:</label>
+      <input class="rounded-xxlg py-2 px-4 text-lg w-full" type="password" id="password">
+    </div>
+
+    <div class="py-4">
+      <button class="p-2 bg-blue rounded-xxlg w-full tracking-wider text-white text-xl" type="submit">Login</button>
+      <p class="normal-text text-sm pt-2 pl-2">{{#link-to "forgotpw"}}Help, I've forgotten my password?{{/link-to}}</p>
+    </div>
+  </div>
+
+  <div class="bg-blue-background px-4">
+    <div class="normal-text py-4">
+      Or log in with...
+    </div>
+  </div>
+
   {{#if this.loginFailureMessage}}
-    <div>
-      {{this.loginFailureMessage}}
+    <div class="p-4 bg-red-light text-white">
+      Oh no! {{this.loginFailureMessage}}
     </div>
   {{/if}}
 </form>

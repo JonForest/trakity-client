@@ -1,7 +1,7 @@
 import Service from '@ember/service'
 import fetch from 'fetch'
 import config  from '../config/environment'
-import { restartableTask } from 'ember-concurrency-decorators'
+import { dropTask } from 'ember-concurrency-decorators'
 import { tracked } from '@glimmer/tracking'
 /**
  * This is not a valid OAuth2 implementation.
@@ -17,7 +17,7 @@ import { tracked } from '@glimmer/tracking'
 export default class AuthenticateService extends Service {
   @tracked accessToken
 
-  @restartableTask
+  @dropTask
   login = function * (email, password) {
     const response = yield fetch(`${config.apiHost}/auth/token`, {
       method: 'POST',
@@ -36,6 +36,11 @@ export default class AuthenticateService extends Service {
       window.localStorage.removeItem('accessToken')
       throw new Error(`Login failed for reason: ${response.statusText}`)
     }
+  }
+
+  @dropTask
+  register = function * (email, password) {
+    // register and then handle log in
   }
 
   getAccessToken() {

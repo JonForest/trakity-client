@@ -10,3 +10,13 @@
 /* .skew-45 {
   transform: skewY(45deg);
 } */
+.tracking-wider {
+  letter-spacing: 0.1rem
+}
+.tracking-xwide {
+  letter-spacing: 1rem;
+}
+
+.normal-text {
+  @apply font-sans font-thin tracking-wide
+}

@@ -8,7 +8,11 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('dashboard', {path: '/'})
+
+  // Login, register and forgot password handling
   this.route('login')
+  this.route('forgotpw')
+  this.route('register');
 })
 
 export default Router

@@ -1,7 +1,16 @@
 #TODO
-* Wire up actual login form
-* Add the ability to optionally run with / without mirage
- ** Need to make mirage understand how to deal with the permissions/auth etc
+* Fix issue moving a task from today to tomorrow
+* How to get Google working as an auth provider?
+* Register new user
+* Migrate tailwind
+* Add 'Tomorrow' and 'This day next week' to the date select
+
+* Implement Lists
+* Implement group edit/move
+
+* Implement batch edits
+
+* Refactor the components to make them more easy to navigate through
  
 ** New task to default to the nearest half-hour
   * Think about this - should it only show a date picker when not on the calendar, and then switch to a date time picker when added to the map? Think about using local storage to handle saving midway through an edit so data is not lost if navigated or refreshed
@@ -45,33 +54,9 @@ x. Controls for each task are not keyboard accessible.
   ** On successful login, redirect to the dashboard
 * Re-use a token from local storage if present on machine following hard refresh
 * Fix using old token after an access token has expired (suspect it's the computed property not updating - add some dependent fields)
-
-BEGIN:VCALENDAR
-VERSION:2.0
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-UID:132456-34365
-SUMMARY:Weekly meeting
-DTSTART:20120101T120000
-DURATION:PT1H
-RRULE:FREQ=WEEKLY
-END:VEVENT
-END:VCALENDAR
-
-
-//    todo: try adding the action back onto the <Icon and see if it now throws?
-//    todo: remove the action helper and replace with the on helper
-//    todo: look at svg-jar to see if it can replace my icon component
-
-
-##CalDav Notes
-```
-GET https://apidata.googleusercontent.com/caldav/v2/jonforest@gmail.com/events
-Accept: */*
-Cache-Control: no-cache
-Authorization: Bearer this._GoogleAuth.currentUser.get().getAuthReponse(true).access_token
-```
-
+* Add the ability to optionally run with / without mirage
+ ** Need to make mirage understand how to deal with the permissions/auth etc
+* Write a proper login form that looks better
 
 # trakity-client
 

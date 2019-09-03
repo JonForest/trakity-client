@@ -14,13 +14,15 @@ export default class LoginFormComponent extends Component {
     // Stop the form submitting itself
     e.preventDefault()
 
+    const { email: {value: email}, password: {value: password} } = e.currentTarget
+
     // Clear any existing login failure message
     this.loginFailureMessage = null
     try {
-      await this.authenticate.login.perform('jonathanh@mediasuite.co.nz', 'password1')
+      await this.authenticate.login.perform(email, password)
       this.router.transitionTo('dashboard')
-    } catch (e) {
-      this.loginFailureMessage = e.message()
+    } catch (error) {
+      this.loginFailureMessage = error.message
     }
   }
 }

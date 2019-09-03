@@ -41,6 +41,10 @@ export default function() {
 
   this.delete('/tasks/:id')
 
+  this.post('/auth/token', (schema, request) => {
+    return {data: {accessToken: '12345'}}
+  })
+
   this.passthrough();
 }
 
